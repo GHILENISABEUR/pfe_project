@@ -1,0 +1,39 @@
+<!-- Niv 7 Predfined vaule  -->
+
+<div class="dialog-container">
+  <h2>Manage Predefined Values</h2>
+  
+  <div class="input-section">
+    <input 
+      [(ngModel)]="VarS_newValue" 
+      placeholder="Enter new value"
+      (keyup.enter)="TS_addValue()"
+    >
+    <button mat-raised-button color="primary" (click)="TS_addValue()">
+      Add
+    </button>
+  </div>
+
+  <div class="values-list">
+    <div *ngIf="VarS_values.length === 0" class="empty-state">
+      No values added yet
+    </div>
+    
+    <div *ngFor="let value of VarS_values; let i = index" class="value-item">
+      <span>{{ value }}</span>
+      <button mat-icon-button (click)="TS_removeValue(i)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="dialog-actions">
+    <button mat-button (click)="TS_cancel()">Cancel</button>
+    <button mat-raised-button 
+            color="primary" 
+            (click)="TS_saveData()"
+            [disabled]="VarS_values.length === 0">
+      Save Values
+    </button>
+  </div>
+</div>

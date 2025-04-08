@@ -1,0 +1,12 @@
+<div class="content">
+    <div class="frames-list">
+        <button (click)="TS_AddFrame()"   >add Frame</button>
+        <p   >Frames: </p>
+        <div class="item"  (dblclick)="openFormFrameEdit=true"
+            [ngStyle]="{backgroundColor:idActiveframe===frame.id?'red':'#1766a5'}"
+            (click)="TS_SelectFrame(frame); idActiveframe=frame.id " *ngFor="let frame of frames" >{{frame.title}}
+        </div>
+    </div>
+    <div class="frame"></div>
+    <div></div>
+</div>

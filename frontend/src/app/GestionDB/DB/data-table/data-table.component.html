@@ -1,0 +1,121 @@
+<!-- Niv4 DATA TAB -->
+
+
+<div class="container">
+  <h2>{{ selectedTable?.name }}</h2>
+
+  <form *ngIf="fields && fields.length" [formGroup]="dataForm">
+
+    <!-- Delete Selected Button -->
+    <div id="delete-selected-btn" *ngIf="selectedIds.length > 0">
+      <button mat-raised-button color="warn" (click)="TS_deleteMultipleRows()">
+        Delete Selected ({{ selectedIds.length }})
+      </button>
+    </div>
+
+    <!-- Material Table -->
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox 
+            [checked]="TS_isAllSelected()"
+            [indeterminate]="selectedIds.length > 0 && !TS_isAllSelected()"
+            (change)="TS_masterToggle()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox 
+            [checked]="TS_isSelected(row.id)"
+            (change)="TS_toggleSelection(row.id)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <!-- Dynamic Columns -->
+      <ng-container matColumnDef="{{ field.name }}" *ngFor="let field of fields">
+        <th mat-header-cell *matHeaderCellDef>{{ field.name }}</th>
+        <td mat-cell *matCellDef="let dataSet">
+          <ng-container *ngIf="dataSet.id !== currentEditId; else editFieldTemplate">
+            {{ dataSet.details[field.name] }}
+          </ng-container>
+          <ng-template #editFieldTemplate>
+            <!-- Date Field with Calendar -->
+            <ng-container *ngIf="field.field_type === 'DATE'">
+              <mat-form-field appearance="fill">
+                <input matInput [matDatepicker]="picker" [formControlName]="field.name">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </ng-container>
+
+            <!-- List Field -->
+            <ng-container *ngIf="field.field_type === 'LIST'">
+              <mat-form-field appearance="fill">
+                <mat-select [formControlName]="field.name">
+                  <mat-option *ngFor="let option of field.list_values" [value]="option">{{ option }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-container>
+
+            <!-- Related Fields -->
+            <ng-container *ngIf="RelatedFields.includes(field.name)">
+              <mat-form-field appearance="fill">
+                <mat-select [formControlName]="field.name">
+                  <mat-option *ngFor="let option of RelatedFieldsData[field.name]" [value]="option.details">
+                    {{ option.id }} -- {{ option.details }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-container>
+
+            <!-- Default Input Field -->
+            <ng-container *ngIf="field.field_type !== 'DATE' && field.field_type !== 'LIST' && !RelatedFields.includes(field.name)">
+              <mat-form-field appearance="fill">
+                <input matInput [formControlName]="field.name" [placeholder]="getPlaceholder(field)">
+              </mat-form-field>
+            </ng-container>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>
+          Actions
+          <button mat-icon-button (click)="TS_addNewRow()" [disabled]="!selectedTable">
+            <mat-icon>add</mat-icon>
+          </button>
+        </th>
+        <td mat-cell *matCellDef="let dataSet">
+          <ng-container *ngIf="dataSet.id !== currentEditId; else editActions">
+            <button mat-icon-button (click)="TS_editRow(dataSet)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="TS_deleteRow(dataSet.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </ng-container>
+          <ng-template #editActions>
+            <button mat-icon-button (click)="TS_onSubmitEdit()">
+              <mat-icon>check</mat-icon>
+            </button>
+            <button mat-icon-button (click)="TS_cancelEdit(dataSet.id)">
+              <mat-icon>close</mat-icon>
+            </button>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <!-- Table Rows -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+
+    <!-- Pagination -->
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+  </form>
+</div>

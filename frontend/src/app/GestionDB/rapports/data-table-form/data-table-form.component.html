@@ -1,0 +1,19 @@
+<div class="flex-container">
+  <div class="container">
+    <div class="rectangle">Table</div>
+    <div class="field-data-group">
+      <ng-container *ngFor="let tableId of TS_objectKeys(selectedFieldsByTableId)">
+        <div *ngFor="let field of selectedFieldsByTableId[tableId]" class="field-container">
+          <div class="rectangle field-name">{{ field.name }}</div>
+          <div class="data-container">
+            <div *ngFor="let dataItem of TS_currentDataForField(tableId, field.id)" class="rectangle data-item">
+              {{ dataItem }} <!-- Directly display the dataItem -->
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <button (click)="TS_previousPage()" [disabled]="currentPage <= 1">Previous</button>
+    <button (click)="TS_nextPage()" [disabled]="currentPage >= totalPages">Next</button>
+  </div>
+</div>

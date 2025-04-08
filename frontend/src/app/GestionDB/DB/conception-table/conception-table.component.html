@@ -1,0 +1,158 @@
+<!-- Niv 3 conception table  -->
+
+
+<div class="flex-container">
+  <div class="cancel">
+    <button (click)="TS_close()" class="close-button">
+      <img src="assets/close.png" alt="Cancel" draggable="false" class="btn-icon">  
+    </button>  
+  </div>
+
+  <div class="container">
+    <div class="rectangle">{{ selectedTable?.name }}</div>
+
+    <div class="rectangle-group">
+      <div *ngFor="let field of fields" class="field-row">
+        <!-- Field Name -->
+        <div class="fields-column">
+          <div class="rectangle-detail">
+            {{ field.name }}
+          </div>
+        </div>
+
+        <!-- Field Type -->
+        <div class="types-column">
+          <div class="rectangle-detail">
+            {{ field.field_type }}
+          </div>
+        </div>
+
+        <!-- Required Checkbox -->
+        <div class="required-column">
+          <div class="rectangle-detail">
+            <label>
+              <input 
+                type="checkbox" 
+                [checked]="field.required" 
+                (change)="TS_toggleFieldRequired(field)" 
+                class="checkbox"
+              >
+              <!-- Niv 3 conception Required checkbox -->
+              Required
+            </label>
+        
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="actions-column" *ngIf="showConceptionTools">
+          <div class="action-buttons">
+            <div (click)="TS_editField(field.id, field.name, field.field_type, field.list_values, field.required)" class="edit-btn">
+              <img src="assets/pen.png" alt="Editing" class="editing-image" draggable="false">
+            </div>
+            <div (click)="TS_deleteField(field.id)" class="delete-btn">
+              <img src="assets/delete.png" alt="Deleting" class="delete-image" draggable="false">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="showConceptionTools" class="add-field-button" (click)="TS_toggleFieldFormVisibility()" role="button" tabindex="0">
+      <img *ngIf="!showSecondImage" src="assets/add (1).png" alt="Add Field" class="editing-image" draggable="false">
+      <img *ngIf="showSecondImage" src="assets/delete (1).png" alt="Cancel Add Field" class="editing-image" draggable="false">
+    </div>
+
+    
+    <div class="rectangle-group" *ngIf="showFieldForm">
+      <form [formGroup]="fieldForm" *ngIf="fieldForm" class="field-row">
+        <div class="fields-column">
+          <div class="rectangle-detail">
+            <!-- Field Name Input -->
+            <div class="input-group">
+              <input formControlName="name" placeholder="Field Name" class="input-field">
+              <!-- Error Message -->
+            </div>
+          </div>
+        </div>
+
+        <div class="types-column">
+          <!-- Field Type Select -->
+          <div class="rectangle-detail">
+            <select formControlName="field_type" class="input-select">
+              <option *ngFor="let type of fieldTypes" [value]="type.value">{{ type.display }}</option>
+            </select>
+          </div>
+          <div class="types-column">
+            <mat-checkbox 
+            formControlName="is_foreign_key" 
+            (change)="checkboxClicked()"
+            [disabled]="!!referredFieldName && !!referredTable" 
+          >
+            Foreign Key
+          </mat-checkbox>
+          </div>
+        </div>
+
+        <!-- Required Checkbox in Form -->
+        <div class="required-column">
+          <div class="rectangle-detail">
+            <label>
+              <input type="checkbox" formControlName="required" class="checkbox">
+              Required
+            </label>
+          </div>
+        </div>
+
+        <div id="error" *ngIf="fieldForm?.get('name')?.hasError('fieldNameExists')" class="mat-error">
+          This field name already exists.
+        </div>
+
+        <!-- Form actions -->
+        <div class="form-actions">
+          <ng-container *ngIf="!isFieldEditing; else updateFieldButton">
+            <div class="create-field-button" (click)="TS_createField()">
+              <img src="assets/check.png" alt="Add Field" class="editing-image" draggable="false">
+            </div>
+          </ng-container>
+          <ng-template #updateFieldButton>
+            <div class="update-field-button" (click)="TS_createField()">
+              <img src="assets/save.png" alt="Update Field" class="editing-image" draggable="false">
+            </div>
+          </ng-template>
+
+          <div *ngIf="isFieldEditing" (click)="TS_resetFieldForm()" type="button">
+            <img src="assets/close.png" alt="Cancel Editing" class="editing-image" draggable="false">
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="button-container">
+      <div *ngIf="!showMoreDetails" class="details-toggle" (click)="TS_toggleDetails()" role="button" tabindex="0">More Details</div>
+      <div *ngIf="showMoreDetails" class="details-toggle" (click)="TS_toggleDetails()" role="button" tabindex="0">Less Details</div>
+    </div>
+
+    <div *ngIf="showMoreDetails" class="additional-details">
+      <div class="conception-button" (click)="TS_toggleConceptionTools()">
+        <div class="bottom-button" [ngClass]="{'active-button': isConceptionToolsActive}">Conception</div>
+      </div>
+
+      <div class="data-buttons">
+        <div class="bottom-button" [ngClass]="{'active-button': isDataTabActive}" (click)="TS_toggleDataTab()">Data-Tab</div>
+        <div class="bottom-button" [ngClass]="{'active-button': isDataFormActive}" (click)="TS_toggleDataForm()">Data-Form</div>
+        <div class="bottom-button" [ngClass]="{'active-button': isExcelActive}" (click)="TS_toggleExcel()">Excel</div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="activeComponent === 'dataTab'" class="data-tab">
+    <app-data-table [fields]="fields" [selectedTable]="selectedTable"></app-data-table>
+  </div>
+  <div *ngIf="activeComponent === 'dataForm'" class="data-form">
+    <app-data-form [fields]="fields" [selectedTable]="selectedTable"></app-data-form>
+  </div>
+  <div *ngIf="activeComponent === 'excel'" class="excel">
+    <app-excel-tab [fields]="fields" [selectedTable]="selectedTable"></app-excel-tab>
+  </div>
+</div>

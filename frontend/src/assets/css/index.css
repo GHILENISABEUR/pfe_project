@@ -1,0 +1,16 @@
+@import url("./jquery-ui.css");
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+p{
+    user-select: none;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}

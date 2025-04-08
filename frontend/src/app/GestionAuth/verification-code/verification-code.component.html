@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OTP Verification Form</title>
+  <link rel="stylesheet" href="./verification-code.component.css" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="CSS_container">
+    <header class="CSS_header">
+      <i class="bx bxs-check-shield CSS_icon"></i>
+    </header>
+    <h4 class="CSS_title">Enter Code</h4>
+    <form class="CSS_form" (ngSubmit)="TS_Sce_verifyCode()">
+      <div class="CSS_input-field">
+        <input type="text" maxlength="1" [(ngModel)]="VarTab_code[0]" name="code0" required class="CSS_input"/>
+        <input type="text" maxlength="1" [(ngModel)]="VarTab_code[1]" name="code1" required class="CSS_input"/>
+        <input type="text" maxlength="1" [(ngModel)]="VarTab_code[2]" name="code2" required class="CSS_input"/>
+        <input type="text" maxlength="1" [(ngModel)]="VarTab_code[3]" name="code3" required class="CSS_input"/>
+      </div>
+      <button type="submit" class="CSS_button">Verify</button>
+    </form>
+  </div>
+</body>
+</html>

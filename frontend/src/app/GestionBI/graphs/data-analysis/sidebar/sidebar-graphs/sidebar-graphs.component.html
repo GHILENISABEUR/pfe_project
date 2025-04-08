@@ -1,0 +1,23 @@
+<div class="container">
+ <!-- <div class="add-sidebar-container">
+    <button class="add-sidebar-button" (click)="addSidebar()">
+      <fa-icon [icon]="faPlus"></fa-icon> Add Sidebar
+    </button>
+  </div>
+-->
+  <div class="sidebars-container">
+    <ng-container *ngFor="let sidebar of sidebars">
+      <ng-container *ngIf="sidebar.isDisplayed">
+        <div class="sidebar-wrapper" [class.active]="sidebar === activeSidebar || sidebar === defaultSidebar">
+          <app-sidebar-instance-graph 
+  [sidebar]="sidebar" 
+  [websiteId]="websiteId"
+  (delete)="deleteSidebar($event)" 
+  (itemSelected)="onItemSelect($event)"> <!-- Listen to itemSelected here -->
+</app-sidebar-instance-graph>
+        </div>
+      </ng-container>
+    </ng-container>
+    
+  </div>
+</div> <!--ff-->

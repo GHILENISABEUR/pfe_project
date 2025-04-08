@@ -1,0 +1,54 @@
+<div class="from-our-db-dialog">
+  <h2 mat-dialog-title>Choose Data Source</h2>
+
+  <!-- Selection for Data Source Type -->
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Data Source Type</mat-label>
+    <mat-select [(value)]="selectedDataSourceType" (selectionChange)="TS_onDataSourceTypeChange($event)">
+      <mat-option value="category">Category</mat-option>
+      <mat-option value="visual">Visual</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Category Selection -->
+  <div *ngIf="selectedDataSourceType === 'category'">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Select Category</mat-label>
+      <mat-select [(value)]="selectedCategory" (selectionChange)="TS_onCategorySelected($event)">
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Visual Selection -->
+  <div *ngIf="selectedDataSourceType === 'visual'">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Select Visual</mat-label>
+      <mat-select [(value)]="selectedVisual" (selectionChange)="TS_onVisualChange($event)">
+        <mat-option *ngFor="let visual of visuals" [value]="visual">
+          {{ visual.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Table Selection (only if a category is selected and has tables) -->
+  <div *ngIf="selectedCategory && tables && tables.length > 0">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Select Table</mat-label>
+      <mat-select [(value)]="selectedTable" (selectionChange)="TS_onTableSelected()">
+        <mat-option *ngFor="let table of tables" [value]="table">
+          {{ table.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Dialog Actions -->
+  <div mat-dialog-actions class="dialog-actions">
+    <button mat-button color="primary" (click)="TS_closeDialog()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="TS_saveAndClose()">Save and Close</button>
+  </div>
+</div>

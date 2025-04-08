@@ -1,0 +1,28 @@
+<div class="flex-container">
+  <app-cat-table (selectedTablesChange)="selectedTables = $event"></app-cat-table>
+
+  <div class="container" draggable="true" (dragstart)="TS_dragStart($event)" (dragend)="TS_dragEnd($event)">
+    <div *ngIf="selectedTables?.length; else noTables">
+      <div class="table-rectangles">
+        <!-- Loop over selected tables to display table names -->
+        <div *ngFor="let table of selectedTables">
+          <div class="table-name rectangle" [class.selected]="selectedTableName === table" (click)="TS_selectTable(table)">
+            {{ table}}
+          </div>
+          <div *ngIf="selectedTableName === table" class="fields-container">
+            <!-- Display fields for the selected table -->
+            <div *ngFor="let field of fieldsByTable[table]" class="field-rectangle">
+              <label>{{ field.name }}</label>
+              <!-- Show disabled checkbox indicating field is part of this table -->
+              <input type="checkbox" [checked]="TS_isFieldSelected(field, table)" (click)="TS_toggleFieldSelection($event, field, table)"  />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #noTables>
+      <p>No selected tables. Please select a table from the list.</p>
+    </ng-template>
+  </div>
+  <app-data-tables [selectedFieldsByTableId]="selectedFieldsByTableId" [selectedTableName]="selectedTableName"></app-data-tables>
+</div>

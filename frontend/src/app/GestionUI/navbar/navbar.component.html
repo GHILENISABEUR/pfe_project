@@ -1,0 +1,25 @@
+<div class="navbar">
+    <div class="frame-container">
+        <div class="frame" #frame> </div>
+    </div>
+    <div class="btn" (click)="goBack()">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>return</span>
+    </div>
+    <div class="menu" >
+        <div class="item" (click)="TS_AddTextToFrame(frame)" >Text</div>
+        <div class="item" (click)="imagePicker.click()"  >
+            Image
+            <input type="file" (change)="TS_ReadImage($event)" #imagePicker style="display: none;" />
+        </div>
+        <div class="item" (click)="TS_AddNavbarHorizontale(frame)"  >Navbar Horizontal</div>
+        <div class="item" (click)="TS_AddTableToFrame(frame)"  >Table</div>
+        <div class="item" (click)="TS_AddTextInputToFrame(frame)">Text Input</div>
+        <div class="item" (click)="TS_AddBtn(frame)">bouton</div>
+    </div>
+  
+    <div class="btn" (click)="TS_SaveWebsite()">
+        <span>save</span>
+    </div>
+</div>
+

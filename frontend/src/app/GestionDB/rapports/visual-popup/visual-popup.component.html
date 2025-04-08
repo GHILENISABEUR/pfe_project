@@ -1,0 +1,50 @@
+<div class="popup-container">
+  <button class="close-btn" (click)="TS_closeDialog()">
+    <img src="assets/close.png" alt="close" class="close-icon"/>
+  </button>
+
+  <div class="update">
+    <button class="update-btn" (click)="TS_handleEdit() ">
+      <img src="assets/pen.png" alt="update" class="update-icon"/>
+    </button>
+
+    <div class="cards">
+      <div *ngIf="showTables">
+        <ul class="card-body">
+          <li *ngFor="let table of selectedTables" class="elm-name" (click)="TS_selectTable(table)">
+            {{ table.name }}
+          </li>
+        </ul>
+      </div>
+
+      <div *ngIf="showFields">
+        <ul class="card-body">
+          <li *ngFor="let field of fields" class="elm-name">
+            <div>{{ field.name }}</div>
+            <button class="delete-btn" (click)="TS_deleteField(field)">
+              <img src="assets/close.png" alt="close" class="delete-icon"/>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div *ngIf="visual.type === 'linked-form'">
+    <app-linked-table-form [selectedFieldsByTableId]="selectedFieldsByTableId" [idweb]="websiteId"></app-linked-table-form>
+  </div>
+
+  <div *ngIf="visual.type === 'data-form'">
+    <app-data-table-form [selectedFieldsByTableId]="selectedFieldsByTableId" ></app-data-table-form>
+  </div>
+  <div *ngIf="visual.type==='linked-table'">
+    <app-data-linked-table-rapport [selectedFieldsByTableId]="selectedFieldsByTableId"></app-data-linked-table-rapport>
+  </div>
+  <div *ngIf="visual.type==='data-table'">
+    <app-data-table-rapport [selectedFieldsByTableId]="selectedFieldsByTableId" ></app-data-table-rapport>
+</div>

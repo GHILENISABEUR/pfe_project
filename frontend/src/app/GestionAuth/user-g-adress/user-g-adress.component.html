@@ -1,0 +1,13 @@
+<div class="CSS_background-container">
+  <form [formGroup]="Form" (ngSubmit)="TS_Sce_SubmitF1()">
+    <h1 class="CSS_h3 mb-3 fw-normal">Please enter your Gmail address below</h1>
+
+    <div *ngIf="VarS_errorMessage" class="CSS_alert alert-danger" role="alert">
+      {{ VarS_errorMessage }}
+    </div>
+    <div class="CSS_input-group mb-3">
+      <input type="email" formControlName="email" class="CSS_form-control" placeholder="Email" required>
+    </div>
+    <button class="w-100 CSS_btn btn-lg btn-primary" type="submit">Next</button>
+  </form>
+</div>

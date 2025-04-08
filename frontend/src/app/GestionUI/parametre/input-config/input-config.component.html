@@ -1,0 +1,17 @@
+<div class="config-container">
+  <button class="close-button" (click)="closeConfigContainer()">X</button>
+  <label>
+    Color:
+    <input type="color" [(ngModel)]="inputField.style.color">
+  </label>
+  <label>
+    Font Size:
+    <select [(ngModel)]="inputField.style.fontSize">
+      <option value="12px">12px</option>
+      <option value="14px">14px</option>
+      <option value="16px">16px</option>
+      <option value="18px">18px</option>
+    </select>
+  </label>
+  <button (click)="deleteInputField()">Delete</button>
+</div>

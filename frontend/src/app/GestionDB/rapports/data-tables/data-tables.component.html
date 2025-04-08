@@ -1,0 +1,32 @@
+<div class="flex-container">
+    <div class="container" draggable="true">
+      <div class="buttons-row">
+        <div
+          class="button"
+          tabindex="0"
+          (click)="TS_selectButton('Data-Tab')"
+          [class.selected]="TS_isTabSelected()"
+        >
+          Data-Tab
+        </div>
+        <div
+          class="button"
+          tabindex="0"
+          (click)="TS_selectButton('Data-Tab Lié')"
+          [class.selected]="TS_isTabLieSelected()"
+        >
+          Data-Tab Lié
+        </div>
+      </div>
+      <div class="switch-button-container">
+        <div class="toggle-button" (click)="TS_toggleForm()">Switch to {{ isFormMode ? 'Tab' : 'Form' }}</div>
+      </div>
+      <ng-container [ngSwitch]="activeComponent">
+        <app-data-table-rapport     *ngSwitchCase="'Data-Tab'" [selectedFieldsByTableId]="selectedFieldsByTableId"></app-data-table-rapport>
+        <app-data-linked-table-rapport *ngSwitchCase="'Data-Tab Lié'" [selectedFieldsByTableId]="selectedFieldsByTableId"></app-data-linked-table-rapport>
+        <app-data-table-form    *ngSwitchCase="'Data-Forms'" [selectedFieldsByTableId]="selectedFieldsByTableId" >   </app-data-table-form>
+        <app-linked-table-form *ngSwitchCase="'Data-Forms Lié'" [selectedFieldsByTableId]="selectedFieldsByTableId"></app-linked-table-form>
+      </ng-container>
+    </div>
+  </div>
+  

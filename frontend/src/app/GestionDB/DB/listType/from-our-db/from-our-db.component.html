@@ -1,0 +1,58 @@
+<!-- Niv 7 from our database -->
+
+<div class="from-our-db-dialog">
+  <h2>Select Data for List</h2>
+
+  <!-- Category Selection -->
+  <div class="form-group">
+    <label for="category-select">Select Category:</label>
+    <select id="category-select" [(ngModel)]="selectedCategory" (change)="TS_onCategorySelected()" class="form-control">
+      <option *ngFor="let category of categories" [ngValue]="category">
+        {{ category.name }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Table Selection -->
+  <div class="form-group" *ngIf="tables && tables.length > 0">
+    <label for="table-select">Select Table:</label>
+    <select id="table-select" [(ngModel)]="selectedTable" (change)="TS_onTableSelected()" class="form-control">
+      <option *ngFor="let table of tables" [ngValue]="table">
+        {{ table.name }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Field Selection -->
+  <div class="form-group" *ngIf="fields && fields.length > 0">
+    <label for="field-select">Select Field:</label>
+    <select id="field-select" [(ngModel)]="selectedField" (change)="TS_onFieldSelected()" class="form-control">
+      <option *ngFor="let field of fields" [ngValue]="field">
+        {{ field.name }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Display Selected Values -->
+  <div class="form-group">
+    <label>Selected Values:</label>
+    <ul class="selected-values">
+      <li *ngFor="let value of lastSelectedListValues; let i = index">
+        {{ value }}
+        <button type="button" class="remove-btn" (click)="TS_removeValue(i)">Remove</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Manual Input for New Values -->
+  <div class="form-group">
+    <input type="text" [(ngModel)]="VarS_newValue" placeholder="Add new value..." class="form-control">
+    <button type="button" class="add-btn" (click)="TS_addValue()">Add</button>
+  </div>
+
+  <!-- Dialog Actions -->
+  <div class="dialog-actions">
+    <button type="button" mat-button (click)="TS_cancel()">Cancel</button>
+    <button type="button" mat-button color="primary" (click)="TS_saveData()">Save</button>
+  </div>
+</div>

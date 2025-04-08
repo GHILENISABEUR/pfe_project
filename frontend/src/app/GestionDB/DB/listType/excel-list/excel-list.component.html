@@ -1,0 +1,33 @@
+<!-- niv 7  from excel  -->
+<div class="dialog-header">
+  <div mat-icon-button (click)="TS_closeDialog()" class="close-button">
+    <mat-icon>close</mat-icon>
+  </div>
+</div>
+<div class="content">
+  <div class="values-container">
+    <div class="input-container">
+      <!-- File Input -->
+      <input type="file" (change)="TS_onFileChange($event)" class="value-rectangle file-input"/>
+
+      <!-- Sheet Selector -->
+      <select [(ngModel)]="selectedSheetName" (change)="TS_onSheetChange($event)" class="value-rectangle select-input">
+        <option *ngFor="let sheet of sheetNames" [value]="sheet">{{ sheet }}</option>
+      </select>
+
+      <!-- Column Selector -->
+      <select [(ngModel)]="selectedColumnName" (change)="TS_onColumnChange($event)" class="value-rectangle select-input">
+        <option *ngFor="let column of columns" [value]="column">{{ column }}</option>
+      </select>
+    </div>
+    <div *ngIf="columnPreview.length > 0" class="column-preview">
+      <h3>Content:</h3>
+      <ul>
+        <li *ngFor="let value of columnPreview">{{ value }}</li>
+      </ul>
+    </div>
+    <!-- Process Button -->
+    <div class="button" (click)="TS_uploadAndProcess()">Done</div>
+  </div>
+
+</div>

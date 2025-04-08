@@ -1,0 +1,195 @@
+.flex-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 20px;
+  }
+  
+  
+  .container {
+    flex: 0 0 300px;
+    min-height: 300px;
+    margin: 0;
+    border: 2px solid #000157;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: move;
+    position: relative;
+    border-radius: 15px;
+    width: 300px;
+    background-color: white;
+  
+  }
+  
+  .larger-container {
+    flex-grow: 4;
+    width: 650px;
+    background-color: white;
+  
+  }
+  
+  
+  
+  .table-name:hover {
+    background-color: #002060;
+    color: white;
+  }
+  
+  .selected {
+    background-color: #002060;
+    color: white;
+  }
+  
+  
+  
+  .flex-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 20px;
+  }
+  
+  .container {
+    flex: 0 0 300px;
+    min-height: 300px;
+    margin: 0;
+    border: 1px solid rgb(195, 219, 255);
+    padding: 20px;
+    border-radius: 10px;
+    cursor: move;
+    position: relative;
+    border-radius: 15px;
+    width: 300px;
+    background-color: rgb(234, 242, 242);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 1);
+  }
+  .larger-container {
+    flex-grow: 4;
+    width: 650px;
+    background-color: white;
+  
+  }
+  
+  .table-name {
+    display: block;
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 8px 15px;
+    margin: 5px;
+    margin-left: -28px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+  
+  }
+  
+  .table-name:hover {
+    background-color: #002060;
+    color: white;
+  }
+  
+  .selected {
+    background-color: #002060;
+    color: white;
+  }
+  
+  
+  
+  /* Existing styles... */
+  
+  .fields-container {
+    margin-left: 20px; /* Adjust margin as needed */
+  }
+  
+  .field-rectangle {
+    background-color: #f2f2f2; /* Light grey background for field rectangles */
+    border: 1px solid #ccc; /* Grey border */
+    padding: 5px; /* Padding inside field rectangles */
+    margin-bottom: 5px; /* Margin between field rectangles */
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Align items vertically in the center */
+  }
+  
+  .field-rectangle label {
+    margin-left: 10px; /* Space between radio button and field name */
+  }
+  /* Common rectangle styling */
+  .rectangle {
+    display: block;
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 8px 15px;
+    margin: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+  
+  }
+  
+  
+  
+  /* Styles for field rectangles, reusing .rectangle */
+  .field-rectangle {
+    /* Additional styles specific to fields if necessary */
+    margin-left: 20px; /* Keep the indent for fields */
+    cursor: default; /* If you don't want the cursor to change to pointer */
+  }
+  
+  
+  .field-container {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Align items vertically */
+    margin-bottom: 5px; /* Space between field containers */
+  }
+  
+  .field-rectangle {
+    margin-left: 10px; /* Space between the checkbox and the rectangle */
+    cursor: pointer; /* If you want the pointer cursor on the rectangle */
+    /* Other styles remain unchanged */
+  }
+  
+  /* Other existing styles remain unchanged */
+  
+  /* Selected style for both tables and fields if needed */
+  .selected {
+    background-color: #002060;
+    color: white;
+  }
+  
+  /* Adjust .fields-container if needed */
+  .fields-container {
+    margin-top: 10px; /* Adds some space between the table name and its fields */
+  }
+  .field-container {
+    display: flex; /* Continues to use flexbox for layout */
+    align-items: center; /* Vertically centers the checkbox with the field name */
+    justify-content: space-between; /* Pushes the checkbox to the far right */
+    margin-bottom: 5px; /* Space between each field container */
+  }
+  
+  .field-rectangle {
+    background-color: #f2f2f2; /* Light grey background for field rectangles */
+    border: 1px solid #ccc; /* Grey border */
+    padding: 5px; /* Padding inside field rectangles */
+    margin-bottom: 5px; /* Margin between field rectangles */
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Align items vertically in the center */
+    justify-content: space-between; /* Push the checkbox to the right */
+    margin-left: 20px; /* Indent field rectangles */
+    border-radius: 15px; /* Match the table rectangle's border-radius */
+  }
+  
+  /* Optional: if you want to ensure that the label takes up most of the space,
+     you can add this */
+  .field-rectangle label {
+    flex-grow: 1;
+  }
+  
+  
+  /* Ensure your checkbox has some margin if it's too close to the rectangle */
+  input[type="checkbox"] {
+    margin-right: 10px; /* Adjust as needed for spacing */
+  }
+  

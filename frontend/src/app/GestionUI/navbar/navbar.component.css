@@ -1,0 +1,465 @@
+
+
+.navbar{
+
+    width: 100%;
+    height: 9%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #032e85;
+    margin-top: 50px;
+}
+
+   .navbar .btn{
+
+    background-color: #2383d1;
+    padding: 0.5%;
+    border-radius: 0.4vw;
+    color: white;
+   
+    display: flex;
+    align-items: center;
+    margin: 0 1%;
+    width: 4.5%;
+    cursor: pointer;
+    justify-content: center;
+    
+
+}
+
+   .navbar .btn i{
+
+    margin-right: 5%;
+    margin-left: 0%;
+    left: 0%;
+}
+
+.navbar .menu{
+
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: center;
+   
+
+}
+
+ .navbar .menu .item{
+
+    margin: 0 1%;
+ 
+    color: white;
+    background-color: #4d91c8;
+    padding: 1%;
+    border-radius: 0.4vw;
+    cursor: pointer;
+    
+}
+
+   .content{
+
+    width: 100%;
+    height: 91%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+   .content .frames-list{
+
+    width: 12%;
+    height: 100%;
+    background-color: #002060;
+    position: relative;
+    display: inline-block;
+
+}
+
+   .content .frames-list button{
+
+    width: 95%;
+    margin: 2%;
+    background-color: #4d91c8;
+    color: white;
+    border: none;
+    border-radius: 0.2vw;
+    padding: 3% 0;
+    font-size: 1.2vw;
+    cursor: pointer;
+
+}
+   .content .frames-list p{
+
+    color: white;
+    font-size: 1.4vw;
+    padding: 7% 5%;
+
+}
+
+
+   .content .frames-list .item{
+
+    margin: 5% 3%;
+    width: 82%;
+    background-color: #1766a5;
+    color: white;
+    padding: 5%;
+    border-radius: 0.3vw;
+    cursor: pointer;
+
+}
+
+   .content .frames-list .item:hover{
+
+    background-color: #114e80;
+
+}
+
+   .content .settings-design{
+
+    width: 15%;
+    height: 100%;
+    background-color: #002060;
+    overflow: hidden;
+    overflow-y: auto;
+
+}
+
+   .content .settings-design .label{
+
+    font-size: 1.2vw;
+    color: white;
+    padding: 5% 2%;
+
+}
+
+   .content .settings-design input{
+
+    width: 85%;
+    margin: 1% 2%;
+    margin-top: 0;
+    padding: 4%;
+    border-radius: 0.3vw;
+
+}
+
+   .content .settings-design select{
+
+    width: 95%;
+    margin: 1% 2%;
+    margin-top: 0;
+    padding: 4%;
+    border-radius: 0.3vw;
+
+}
+
+   .content .settings-design .bgcolorbtn{
+
+    width: 86%;
+    margin: 5% 3%;
+    background-color: #1766a5;
+    padding: 5% 4%;
+    display: flex;
+    align-items: center;
+    border-radius: 0.2vw;
+    font-size: 1.1vw;
+    color: white;
+    position: relative;
+
+}
+
+   .content .settings-design .bgcolorbtn .indcolor{
+
+    width: 11%;
+    padding: 5% 0;
+    background-color: red;
+    border-radius: .3vw;
+    margin-right: 4%;
+    cursor: pointer;
+
+}
+
+   .content .settings-design .colorspickerbg{
+
+    width: 100%;
+    padding: 3%;
+    background-color: white;
+    position: absolute;
+    top: 87%;
+    right: -2%;
+    z-index: 12434654;
+    box-shadow: 0 0 0.5vw 0 rgba(0, 0, 0, 0.274);
+    border-radius: 0.4vw;
+    display: inline-block;
+    transition: 0.2s;
+
+
+}
+
+   .content .settings-design .colorspickerbg .color{
+
+    width: 10.5%;
+    padding: 5% 0;
+    background-color: green;
+    border-radius: 0.2vw;
+    cursor: pointer;
+    float: left;
+    margin: 1%;
+
+}
+
+.content .settings-design .colorspickertxt{
+
+    width: 100%;
+    padding: 3%;
+    background-color: white;
+    position: absolute;
+    top: 87%;
+    right: -2%;
+    z-index: 12434654;
+    box-shadow: 0 0 0.5vw 0 rgba(0, 0, 0, 0.274);
+    border-radius: 0.4vw;
+    display: inline-block;
+    transition: 0.2s;
+
+}
+
+   .content .settings-design .colorspickertxt .color{
+
+    width: 10.5%;
+    padding: 5% 0;
+    background-color: green;
+    border-radius: 0.2vw;
+    cursor: pointer;
+    float: left;
+    margin: 1%;
+
+}
+
+ .content .settings-design button{
+
+    width: 95%;
+    margin: 2%;
+    border: none;
+    border-radius: 0.3vw;
+    background-color: #2383d1;
+    cursor: pointer;
+    font-size: 1.1vw;
+    padding: 5% 0;
+    color: white;
+    margin-top: 5%;
+
+}
+
+ .content .settings-design .hr{
+
+    width: 95%;
+    margin: 4% 2%;
+    margin-top: 8%;
+    border-top: 0.1vw solid rgba(255, 255, 255, 0.46);
+
+}
+
+
+ .content .frame-container{
+
+    width: 73%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+
+}
+
+ .content .frame-container .frame{
+
+    width: 97%;
+    height: 95%;
+    border-radius: 0.6vw;
+    border: .2vw solid #4d91c8;
+    overflow: hidden;
+    position: relative;
+
+}
+
+
+
+.edit-frame-details{
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+    background-color: #0000006e;
+    z-index: 284392479857844489798;
+    overflow: hidden;
+    overflow-y: auto;
+
+}
+
+.edit-frame-details .form{
+
+    width: 40%;
+    padding: 1%;
+    border-radius: 0.4vw;
+    background-color: #222222;
+    margin: 3% 30%;
+
+}
+
+.edit-frame-details .form label{
+
+    font-size: 1.4vw;
+    color: white;
+
+}
+
+.edit-frame-details .form input{
+
+    width: 97%;
+    padding: 2.5% 1%;
+    border: 0.1vw solid #4b4b4b;
+    border-radius: 0.4vw;
+    background-color: #222222;
+    font-size: 1.1vw;
+    margin: 3% 0;
+    margin-top: 2%;
+    color: white;
+    
+}
+
+.edit-frame-details .form input:focus{
+
+    border-color: #4e4e4e;
+    background-color: #2c2c2c;
+
+}
+
+.edit-frame-details .form .code-edit{
+
+    width: 100%;
+    height: 48%;
+    background-color: #303030;
+    overflow: hidden;
+    border-radius: 0.4vw;
+    margin-top: 2%;
+
+}
+
+.edit-frame-details .form textarea{
+
+    width: 97%;
+    height: 89%;
+    padding: 2.5% 1.2%;
+    border: none;
+    border-radius: 0.4vw;
+    background-color: transparent;
+    font-size: 1.1vw;
+    color: white;
+    resize: none;
+    
+}
+
+.edit-frame-details .form button{
+
+    width: 100%;
+    padding: 2%;
+    border: none;
+    border-radius: 0.4vw;
+    background-color: #303030;
+    color: white;
+    font-size: 1.2vw;
+    cursor: pointer;
+    margin-bottom: 3%;
+
+}
+
+.edit-frame-details .form button:hover{
+
+    background-color: #383838;
+
+}
+
+
+.edit-frame-details .form button i{
+
+    margin-right: 2%;
+
+}
+
+.edit-frame-details .form button.save{
+
+    background-color: #0e8ce0;
+
+}
+
+.edit-frame-details .form button.save:hover{
+
+    background-color: #0778c3;
+
+}
+
+.edit-frame-details .closebtn{
+
+    margin-right: 1%;
+    color: white;
+    font-size: 1.2vw;
+    cursor: pointer;
+    position: absolute;
+    top: 3%;
+    right: 1%;
+    background-color: #444444;
+    border-radius: 100%;
+    padding: 0.76% 1%;
+    padding-top: 0.79%;
+
+}
+.button-container {
+    position: fixed;
+    margin-left: 170px;
+    display: flex;
+    gap: 10px;
+  }
+  .button {
+    background-color: #002060;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-left: 30px;
+    height: 40px;
+    width: 200px;
+  }
+  .fab {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    background-color: #40a9ff;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    color: white;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.fab:hover {
+    background-color: #1e87e9;
+}
+
+.fab i {
+    pointer-events: none;
+}

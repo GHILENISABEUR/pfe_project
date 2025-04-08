@@ -1,0 +1,50 @@
+<div class="settings-menu">
+    <div class="toggle-controls" *ngIf="!isStyleMenuVisible">
+      <label>
+        <span>Add Parent</span>
+        <input type="checkbox" [checked]="enableAddParent" (change)="toggleEnableAddParent()">
+      </label>
+      <label>
+        <span>Add Child</span>
+        <input type="checkbox" [checked]="enableAddChild" (change)="toggleEnableAddChild()">
+      </label>
+      <label>
+        <span>Edit Item</span>
+        <input type="checkbox" [checked]="enableEdit" (change)="toggleEnableEdit()">
+      </label>
+      <label>
+        <span>Delete Item</span>
+        <input type="checkbox" [checked]="enableDelete" (change)="toggleEnableDelete()">
+      </label>
+      <label>
+        <span>Reorder Items</span>
+        <input type="checkbox" [checked]="enableReorder" (change)="toggleEnableReorder()">
+      </label>
+      <label>
+        <span>Move to Parent</span>
+        <input type="checkbox" [checked]="enableMoveToParent" (change)="toggleEnableMoveToParent()">
+      </label>
+      <label>
+        <span>Move Sidebar</span>
+        <input type="checkbox" [checked]="enableMoveSidebar" (change)="toggleEnableMoveSidebar()">
+      </label>
+      <label>
+        <span>Resize Sidebar</span>
+        <input type="checkbox" [checked]="enableResizeSidebar" (change)="toggleEnableResizeSidebar()">
+      </label>
+      <button (click)="showStyleMenu()">Style</button>
+    </div>
+  
+    <div class="style-menu" *ngIf="isStyleMenuVisible">
+      <h3>Select Theme</h3>
+      <div class="theme-options">
+        <button class="theme-button default-theme" (click)="applyTheme('default')">Default</button>
+        <button class="theme-button nature-theme" (click)="applyTheme('nature')">Nature</button>
+        <button class="theme-button modern-theme" (click)="applyTheme('modern')">Modern</button>
+        <button class="theme-button dark-theme" (click)="applyTheme('dark')">Dark</button>
+        <button class="theme-button light-theme" (click)="applyTheme('light')">Light</button>
+      </div>
+      <button class="back-button" (click)="showToggleMenu()">Back</button>
+    </div>
+  </div>
+  

@@ -1,0 +1,14 @@
+OrderDate,Region,Rep,Item,Units,Unit Cost,Total
+2022-02-18,East,Jones,Binder,4,4.99,19.96
+2021-07-12,East,Howard,Binder,29,1.99,57.71
+2021-08-15,East,Jones,Pencil,35,4.99,174.65
+2021-01-06,East,Jones,Pencil,95,1.99,189.05
+2021-09-18,East,Jones,Pen Set,16,15.99,255.84
+2021-04-01,East,Jones,Binder,60,4.99,299.40000000000003
+2021-11-08,East,Parent,Pen,15,19.99,299.84999999999997
+2022-07-04,East,Jones,Pen Set,62,4.99,309.38
+2022-04-27,East,Howard,Pen,96,4.99,479.04
+2021-06-08,East,Jones,Binder,60,8.99,539.4
+2021-10-22,East,Jones,Pen,64,8.99,575.36
+2021-12-29,East,Parent,Pen Set,74,15.99,1183.26
+2021-07-29,East,Parent,Binder,81,19.99,1619.1899999999998

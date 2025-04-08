@@ -1,0 +1,25 @@
+OrderDate,Region,Rep,Item,Units,Unit Cost,Total
+2022-09-10,Central,Gill,Pencil,7,1.29,9.030000000000001
+2022-10-31,Central,Andrews,Pencil,14,1.29,18.060000000000002
+2022-11-17,Central,Jardine,Binder,11,4.99,54.89
+2022-05-14,Central,Gill,Pencil,53,1.29,68.37
+2021-12-12,Central,Smith,Pencil,67,1.29,86.43
+2022-04-10,Central,Andrews,Pencil,66,1.99,131.34
+2022-12-21,Central,Andrews,Binder,28,4.99,139.72
+2021-04-18,Central,Andrews,Pencil,75,1.99,149.25
+2021-02-09,Central,Jardine,Pencil,36,4.99,179.64000000000001
+2022-03-24,Central,Jardine,Pen Set,50,4.99,249.5
+2021-09-01,Central,Smith,Desk,2,125.0,250.0
+2021-10-05,Central,Morgan,Binder,28,8.99,251.72
+2022-01-15,Central,Gill,Binder,46,8.99,413.54
+2021-05-05,Central,Jardine,Pencil,90,4.99,449.1
+2021-06-25,Central,Morgan,Pencil,90,4.99,449.1
+2021-11-25,Central,Kivell,Pen Set,96,4.99,479.04
+2021-02-26,Central,Gill,Pen,27,19.99,539.7299999999999
+2022-06-17,Central,Kivell,Desk,5,125.0,625.0
+2022-07-21,Central,Morgan,Pen Set,55,12.49,686.95
+2022-05-31,Central,Gill,Binder,80,8.99,719.2
+2021-01-23,Central,Kivell,Binder,50,19.99,999.4999999999999
+2022-08-07,Central,Kivell,Pen Set,42,23.95,1005.9
+2022-02-01,Central,Smith,Binder,87,15.0,1305.0
+2022-12-04,Central,Jardine,Binder,94,19.99,1879.06

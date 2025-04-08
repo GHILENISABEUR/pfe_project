@@ -1,0 +1,39 @@
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adjust the space between buttons */
+  }
+  
+  .animated-button {
+    background-color: #1d749c; /* Button background color */
+    color: white; /* Button text color */
+    padding: 15px 20px; /* Button padding */
+    border: none; /* Remove border */
+    cursor: pointer; /* Change mouse cursor on hover */
+    outline: none; /* Remove outline */
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition for hover effects */
+  }
+  
+  .animated-button:hover {
+    transform: scale(1.05); /* Slightly increase button size on hover */
+    background-color: #0a4361; /* Slightly darken the button on hover */
+  }
+  .buttons-container {
+    display: flex;
+    justify-content: center; /* Center the button wrapper horizontally */
+    align-items: center; /* Center the button wrapper vertically */
+    height: 300px; /* Height of the larger container */
+    margin: auto; /* Center the container on the page */
+    background-color: #f0f0f0; /* Background color of the larger container */
+    padding: 20px; /* Padding inside the larger container */
+    border-radius: 15px; /* Rounded corners for the larger container */
+  }
+  .large-container {
+    display: flex; /* Use flexbox to align children */
+    justify-content: center; /* Center children horizontally */
+    align-items: center; /* Center children vertically */
+    height: 300px;
+    margin: auto; /* Keep the container centered on the page */
+    background-color: #ffffff;
+  }
+  

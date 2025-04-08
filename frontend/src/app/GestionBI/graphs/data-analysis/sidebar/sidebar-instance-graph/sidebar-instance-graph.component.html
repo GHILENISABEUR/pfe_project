@@ -1,0 +1,165 @@
+<div class="sidebar" [ngClass]="'sidebar-' + sidebar.id">
+  <div class="sidebar-header">
+    <button class="settings-button" (click)="toggleSettingsMenu()">Settings</button>
+    <button class="delete-sidebar-button" (click)="deleteSidebar()">
+      <fa-icon [icon]="faTimes"></fa-icon> Delete Sidebar
+    </button>
+  </div>
+  <button *ngIf="enableAddParent" (click)="addItem(null)">Add Root Item</button>
+  <div cdkDropListGroup>
+    <div cdkDropList (cdkDropListDropped)="drop($event, sidebarItems)">
+      <!-- Added $event.stopPropagation() to prevent parent click handling -->
+      <div *ngFor="let item of sidebarItems" (click)="selectItem(item, $event)" [ngClass]="{'selected': item.isSelected}">
+        <div class="sidebar-item-content" [class.editing]="item.isEditing">
+          <ng-container *ngIf="!item.isEditing">
+            <div class="item-header">
+              <!-- Added $event.stopPropagation() -->
+              <button *ngIf="item.children?.length" class="toggle-children-button" (click)="toggleChildrenVisibility(item, $event); $event.stopPropagation()">
+                <fa-icon [icon]="item.isExpanded ? faChevronDown : faChevronRight"></fa-icon>
+              </button>
+              {{ item.title }}
+              <!-- Added $event.stopPropagation() -->
+              <button class="options-button" (click)="toggleOptionMenu($event, item.id); $event.stopPropagation()">
+                &#x22EE;
+              </button>
+            </div>
+            <div class="item-buttons" [ngClass]="{ 'visible': openOptionMenuId === item.id }">
+              <!-- Added $event.stopPropagation() -->
+              <button *ngIf="enableAddChild" (click)="addItem(item); $event.stopPropagation()">
+                <fa-icon [icon]="faPlus"></fa-icon>
+              </button>
+              <!-- Added $event.stopPropagation() -->
+              <button *ngIf="enableEdit" (click)="editItem(item); $event.stopPropagation()">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </button>
+              <!-- Added $event.stopPropagation() -->
+              <button *ngIf="enableDelete" (click)="deleteItem(item); $event.stopPropagation()">
+                <fa-icon [icon]="faTimes"></fa-icon>
+              </button>
+              <!-- Added $event.stopPropagation() -->
+              <button *ngIf="enableMoveToParent" (click)="openMoveModal(item); $event.stopPropagation()">
+                Move
+              </button>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="item.isEditing">
+            <div class="form-group">
+              <input type="text" [(ngModel)]="item.title" placeholder="Title" />
+            </div>
+            <div class="form-group">
+              <input type="text" [(ngModel)]="item.url" placeholder="URL" />
+            </div>
+            <button (click)="saveItem(item)">Save</button>
+          </ng-container>
+        </div>
+        <!-- Recursive children list -->
+        <div *ngIf="item.isExpanded && item.children?.length" class="sidebar-children">
+          <ng-container *ngTemplateOutlet="recursiveList; context: { $implicit: item.children }"></ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resize-handle" (mousedown)="onSidebarResizeMouseDown($event)"></div>
+  <div class="move-handle" (mousedown)="onSidebarMoveMouseDown($event)"></div>
+</div>
+
+<div id="moveModal" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="closeMoveModal()">&times;</span>
+    <h2>Select a new parent for {{ selectedItem?.title }}</h2>
+    <div class="modal-body">
+      <ul class="modal-list">
+        <li *ngFor="let rootItem of filteredSidebarItems">
+          <button (click)="selectedItem && moveItemToParent(selectedItem, rootItem)">
+            {{ rootItem.title }}
+          </button>
+          <ul *ngIf="rootItem.children?.length">
+            <ng-container *ngTemplateOutlet="recursiveMoveList; context: { $implicit: rootItem.children }"></ng-container>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<ng-template #recursiveList let-children>
+  <div cdkDropList (cdkDropListDropped)="drop($event, children)">
+    <!-- Added $event.stopPropagation() to prevent parent click handling -->
+    <div *ngFor="let child of children" (click)="selectItem(child, $event)" [ngClass]="{'selected': child.isSelected}">
+      <div class="sidebar-item-content" [class.editing]="child.isEditing">
+        <ng-container *ngIf="!child.isEditing">
+          <div class="item-header">
+            <!-- Added $event.stopPropagation() -->
+            <button *ngIf="child.children?.length" class="toggle-children-button" (click)="toggleChildrenVisibility(child, $event); $event.stopPropagation()">
+              <fa-icon [icon]="child.isExpanded ? faChevronDown : faChevronRight"></fa-icon>
+            </button>
+            {{ child.title }}
+            <!-- Added $event.stopPropagation() -->
+            <button class="options-button" (click)="toggleOptionMenu($event, child.id); $event.stopPropagation()">
+              &#x22EE;
+            </button>
+          </div>
+          <div class="item-buttons" [ngClass]="{ 'visible': openOptionMenuId === child.id }">
+            <!-- Added $event.stopPropagation() -->
+            <button *ngIf="enableAddChild" (click)="addItem(child); $event.stopPropagation()">
+              <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
+            <!-- Added $event.stopPropagation() -->
+            <button *ngIf="enableEdit" (click)="editItem(child); $event.stopPropagation()">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+            <!-- Added $event.stopPropagation() -->
+            <button *ngIf="enableDelete" (click)="deleteItem(child); $event.stopPropagation()">
+              <fa-icon [icon]="faTimes"></fa-icon>
+            </button>
+            <!-- Added $event.stopPropagation() -->
+            <button *ngIf="enableMoveToParent" (click)="openMoveModal(child); $event.stopPropagation()">
+              Move
+            </button>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="child.isEditing">
+          <div class="form-group">
+            <input type="text" [(ngModel)]="child.title" placeholder="Title" />
+          </div>
+          <div class="form-group">
+            <input type="text" [(ngModel)]="child.url" placeholder="URL" />
+          </div>
+          <button (click)="saveItem(child)">Save</button>
+        </ng-container>
+      </div>
+      <div *ngIf="child.isExpanded && child.children?.length" class="sidebar-children">
+        <ng-container *ngTemplateOutlet="recursiveList; context: { $implicit: child.children }"></ng-container>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #recursiveMoveList let-children>
+  <li *ngFor="let child of children">
+    <button (click)="selectedItem && moveItemToParent(selectedItem, child)">
+      {{ child.title }}
+    </button>
+    <ul *ngIf="child.children?.length">
+      <ng-container *ngTemplateOutlet="recursiveMoveList; context: { $implicit: child.children }"></ng-container>
+    </ul>
+  </li>
+</ng-template>
+
+<!-- Insert the SidebarSettingsComponent here -->
+<app-sidebar-settings-graphs
+  *ngIf="settingsMenuVisible"
+  [(enableAddParent)]="enableAddParent"
+  [(enableAddChild)]="enableAddChild"
+  [(enableEdit)]="enableEdit"
+  [(enableDelete)]="enableDelete"
+  [(enableReorder)]="enableReorder"
+  [(enableMoveToParent)]="enableMoveToParent"
+  [(enableMoveSidebar)]="enableMoveSidebar"
+  [(enableResizeSidebar)]="enableResizeSidebar"
+  [(isStyleMenuVisible)]="isStyleMenuVisible"
+  [(currentTheme)]="currentTheme"
+  (currentThemeChange)="applyTheme($event)"
+></app-sidebar-settings-graphs>
+<!--ff-->

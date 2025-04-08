@@ -1,0 +1,107 @@
+.container {
+    min-width: 400px; /* Minimum width */
+    min-height:320px;
+    height:auto;
+    margin: auto;
+    padding: 20px;
+    border: 2px solid #002060;
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    border: 1px solid rgb(195, 219, 255);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 1);
+    background-color: rgb(234, 242, 242);
+  }
+
+  .rectangle {
+    width: 200px;
+    height: 40px;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .input-file , .map-btn{
+    font-size: 12px;
+    padding: 8px 16px;
+    margin: 5px;
+    border: 1px solid #002060;
+    border-radius: 15px;
+    background-color: white;
+    color: #002060;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .rectangle-detail{
+    position: relative;
+    width: 90px;
+    height: 30px;
+    background-color: #ffffff;
+    border: 1px solid #8db3ff;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .row-import{
+    margin-top:30px;
+    display:flex;
+    flex-direction: row;
+    gap:30px;
+    
+  }
+  .row{
+    display:flex;
+    justify-content: space-between;
+    align-items: center; /* Align the items vertically */
+    width:auto;
+    gap:30px;
+  }
+  .row select{
+    width:120px;
+  }
+  #sheet{
+    width:150px;
+  }
+  .map-btn{
+    font-size: 12px;
+    padding: 8px 16px;
+    margin: 5px;
+    border: 1px solid #002060;
+    border-radius: 15px;
+    background-color: white;
+    color: #002060;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .btns{
+    display: flex;
+    gap:10px;
+    margin-bottom:20px;
+  }
+  .map-btn:active ,
+  .map-btn:hover{
+    background-color: #002060;
+    color: white;
+
+  }
+  .map-btn:disabled ,
+  .map-btn:disabled:hover{
+    background-color: rgb(245, 235, 235);
+    color:#002060;
+    cursor:default;
+  }

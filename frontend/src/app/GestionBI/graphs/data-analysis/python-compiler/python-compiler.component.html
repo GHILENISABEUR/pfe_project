@@ -1,0 +1,101 @@
+<div class="testbox container">
+  <div class="row title">
+      <div class="titleContainer">
+          <h6 *ngIf="editable" style="font-size: 16px;">{{codeGraph.Img_Name || codeGraph.File_Name}}</h6>
+          <input *ngIf="!editable" [(ngModel)]="FileName" spellcheck="false" [ngModelOptions]="{standalone: true}">
+      </div>
+  </div>
+  <div class="row iconManagement">
+      <div *ngFor="let tag of dataManagement; let index=index" [ngClass]="{'selected': tag.isOpen, 'deactivate': !editable && (tag.name != 'Code')}" (click)="openManagementDataTab(index)">
+          <h6>{{ tag.name }}</h6>
+      </div>
+  </div>
+
+  <div *ngIf="verifiesIsOpen('Code')" style="padding: 5px;">
+      <!-- Flex container to display file selection, code input and graph side by side -->
+      <div class="content-container" style="display: flex; gap: 20px;">
+          <!-- Left Column for file selection and code input -->
+          <div class="left-column" style="flex: 1;">
+              <!-- File Selection Section -->
+              <div class="file-selection">
+                  <label for="file-select">Select File:</label>
+                  <select id="file-select" [(ngModel)]="selectedFileId" (change)="onFileSelected($event)">
+                      <option *ngFor="let file of fileOptions" [value]="file.id">{{ file.name }}</option>
+                      <!-- <option *ngFor="let file of fileOptions" [value]="file.id">{{ file.name }}</option> -->
+
+                  </select>
+              </div>
+
+              <!-- Code Input Section -->
+              <div class="code-section">
+                <textarea class="code-textarea" [(ngModel)]="code" rows="10" cols="50" placeholder="Enter Python code here..."></textarea>
+                <button class="compile-button" (click)="onCompile()">Compile</button>
+                <button class="filters-button" (click)="openSegmentsFilterPopup()">Filters</button>
+
+              </div>
+          </div>
+
+          <!-- Right Column for displaying generated graphs -->
+          <div class="right-column" style="flex: 1;">
+            <div *ngIf="showGraphSection" class="graph-container">
+              <!-- <div *ngFor="let graph of graphs" class="graph-item"> -->
+                <div class="graph-item">
+                <div class="graph-box">
+                  <img [src]="graphs" alt="Generated Graph" class="graph-image" />
+                </div>
+              </div>
+              <!-- <button class="validate-button" (click)="onValidate()">Validate</button> -->
+            </div>
+          </div>
+      </div>
+
+      <!-- Unique Values Panel for Segments -->
+      <!-- <div *ngFor="let segment of selectedSegments; let i = index" class="unique-values-panel resizable draggable" cdkDrag [ngStyle]="{'width.px': width, 'height.px': height}" (cdkDragEnded)="onDragEnd($event)" (mousedown)="onResizeStart($event)">
+          <div class="draggable-header">
+              <button (click)="onSegmentDeselected(segment.column)">Close</button>
+              <button class="sort-button" (click)="toggleSort(i)">Sort</button>
+          </div>
+          <div class="unique-values-body">
+              <h3>Unique Values for: {{ segment.column }}</h3>
+              <div class="unique-values-list">
+                  <button *ngFor="let value of getSortedUniqueValues(segment, i)" (click)="onUniqueValueClicked(segment.column, value, $event)" [ngClass]="{'selected': segment.uniqueValues.includes(value)}" class="unique-value-button">
+                      {{ value }} -->
+                      <!-- Display a checkmark if the value is selected -->
+                      <!-- <span *ngIf="segment.uniqueValues.includes(value)">✔</span>
+                  </button>
+              </div>
+          </div>
+          <div class="resize-handle"></div>
+      </div> -->
+
+      <!-- Filters Section -->
+      <div *ngIf="filtersVisible" class="filters-section">
+          <button class="filters-btn" (click)="openSegmentsFilterPopup()">Segments Filter</button>
+          <button class="filters-btn" (click)="openChronologyFilterPopup(this.selectedFile)">Chronology Filter</button>
+      </div>
+
+      <!-- File Upload Component -->
+      <app-file-upload></app-file-upload>
+
+      <!-- Filters Selection Component -->
+      <app-filters-selection *ngIf="filtersVisible" [selectedFile]="selectedFile"></app-filters-selection>
+  </div>
+
+  <!-- Other Management Tabs -->
+  <div *ngIf="verifiesIsOpen('management')">
+      <app-reports [codeGraph]="codeGraph"></app-reports>
+  </div>
+  <div *ngIf="verifiesIsOpen('Causes')">
+      <app-causes (openGraphTab)="openGraphTab($event)" [codeGraph]="codeGraph"></app-causes>
+  </div>
+  <div *ngIf="verifiesIsOpen('Consequences')">
+      <app-consequences [codeGraph]="codeGraph" (openGraphTab)="openGraphTab($event)"></app-consequences>
+  </div>
+
+  <!-- Close Button -->
+  <div class="row">
+      <div class="btn-block">
+          <button class="redBackGround" (click)="close()">Close</button>
+      </div>
+  </div>
+</div>

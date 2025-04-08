@@ -1,0 +1,130 @@
+<div class="table-container" (click)="onClick()"  [id]="'table-' + table.id"  [style.top.px]="position?.y"  [style.left.px]="position?.x"
+cdkDrag (cdkDragStarted)="dragStarted($event)" (cdkDragEnded)="dragEnded($event)" [cdkDragDisabled]="!table.toggle.isDragEnabled"  >
+
+    <div #tableContainer       class="rectangle"  mwlResizable [validateResize]="validate" [enableGhostResize]="true" (resizeEnd)="onResizeEnd($event)"
+    >
+    <mat-form-field *ngIf="filteringEnabled">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. name">
+    </mat-form-field>
+      <div class="resize-handle-top" mwlResizeHandle [resizeEdges]="{ top: true }"></div>
+      <div class="resize-handle-left" mwlResizeHandle [resizeEdges]="{ left: true }"></div>
+      <div class="resize-handle-right" mwlResizeHandle [resizeEdges]="{ right: true }"></div>
+      <div class="resize-handle-bottom" mwlResizeHandle [resizeEdges]="{ bottom: true }"></div>
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" cdkDropList (cdkDropListDropped)="drop($event)" [ngStyle]="table.tableStyle"
+             cdkDropListData="dataSource" [cdkDropListDisabled]="!table.toggle.isRowDragEnabled" [ngClass]="{'no-border': !table?.borderVisible}"  [ngClass]="{'no-cell-border': !table?.cellBorderVisible}"    >
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef [ngClass]="{'th_td': table?.borderVisible}"></th>
+          <td mat-cell *matCellDef="let element; let i = index" cdkDrag cdkDragBoundary=".table-container" [cdkDragDisabled]="!table.toggle.isRowDragEnabled" [ngClass]="{'th_td': table?.borderVisible}">
+            <span class="select-arrow" *ngIf="!isUserMode" (click)="startRowSelection(i)" (mouseup)="endRowSelection()">►</span>
+            <span class="remove-row" (click)="removeRow(i)" *ngIf="!isUserMode"><mat-icon matTooltip="supprimer ligne">delete</mat-icon></span>
+            <!-- <span class="modify-row" (click)="modifyRow(i)" *ngIf="!isUserMode">
+              <mat-icon matTooltip="modifier ligne">edit</mat-icon>
+            </span> -->
+            <!-- Add validate icon -->
+            <span class="validate-row" (click)="validateRow(i)" *ngIf="!isUserMode && table.disableld">
+              <mat-icon matTooltip="valider ligne">check</mat-icon>
+            </span>
+          </td>
+        </ng-container>
+        <span cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="dropColumn($event)" [cdkDropListData]="displayedColumns" [cdkDropListDisabled]="!table.toggle.isColumnDragEnabled">
+          <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+            <th mat-header-cell *matHeaderCellDef [attr.data-column-id]="column" cdkDrag [cdkDragDisabled]="!table.toggle.isColumnDragEnabled" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="dropColumn($event)" [cdkDropListData]="displayedColumns"
+                (mousedown)="startCellSelection($event, -2, column)" (mousemove)="mouseMoveCellSelection($event, -2, column)"
+                (mouseup)="endCellSelection()"
+                [ngClass]="{'selected-cell': isCellSelected(-2, column), 'th_td': table?.borderVisible}"
+                [style.background-color]="table?.cellStyles?.[-2]?.[column]?.backgroundColor"
+                [style.color]="table?.cellStyles?.[-2]?.[column]?.textColor"
+                [style.font-family]="table?.cellStyles?.[-2]?.[column]?.font"
+                [style.border]="table.cellStyles?.[-2]?.[column]?.border"
+                >
+              <div class="header-container">
+                <div *ngIf="editingHeader !== column" (dblclick)="startEditHeader(column)" [innerHTML]="column || '&nbsp;'">
+                  {{ column }}
+                </div>
+                <input *ngIf="editingHeader === column" [value]="column" (blur)="onColumnNameChange($event, column)" />
+
+
+              </div>
+              <span class="select-arrow" *ngIf="!isUserMode" (click)="startColumnSelection(column)" (mouseup)="endColumnSelection()">▼</span>
+              <span class="remove-column" (click)="removeColumn(column)" *ngIf="!isUserMode &&!table.disableld"><mat-icon matTooltip="supprimer colonne">delete</mat-icon></span>
+              <mat-icon matPrefix (click)="toggleFilterInput(column)">search</mat-icon>
+                  <input matInput *ngIf="filterVisible[column]" (keyup)="applyColumnFilter($event, column)" placeholder="Filtrer" class="filter-input" />
+            </th>
+            <td mat-cell *matCellDef="let element; let i = index" [attr.data-column-id]="column" [attr.data-row-index]="i"
+                (mousedown)="startCellSelection($event, i, column)" (mousemove)="mouseMoveCellSelection($event, i, column)"
+                (mouseup)="endCellSelection()"
+                [ngClass]="{'selected-cell': isCellSelected(i, column), 'th_td': table?.borderVisible}"
+                [style.background-color]="table?.cellStyles?.[i]?.[column]?.backgroundColor"
+                [style.color]="table?.cellStyles?.[i]?.[column]?.textColor"
+                [style.font-family]="table?.cellStyles?.[i]?.[column]?.font"
+                [style.border]="table.cellStyles?.[i]?.[column]?.border"
+               >
+              <div class="cell-container">
+                <div *ngIf="!(editingCell && editingCell.rowIndex === i && editingCell.column === column)" (dblclick)="startEditCell(i, column)" [innerHTML]="element[column] || '&nbsp;'">
+                  {{ element[column]}}
+                </div>
+                <input *ngIf="editingCell && editingCell.rowIndex === i && editingCell.column === column" [value]="element[column]" (blur)="saveCell(i, column, $event)" />
+              </div>
+            </td>
+          </ng-container>
+        </span>
+
+        <tr mat-header-row *matHeaderRowDef="allColumns" [style.background-color]="table.backgroundColor"></tr>
+        <tr mat-row *matRowDef="let row; columns: allColumns;" cdkDrag [cdkDragData]="row" [style.background-color]="table.backgroundColor" [cdkDragDisabled]="!table.toggle.isRowDragEnabled"></tr>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data</td>
+        </tr>
+      </table>
+      <mat-paginator *ngIf="paginationEnabled" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons [style.background-color]="table.backgroundColor"  ></mat-paginator>
+
+<div class="button-container" >
+
+  <button mat-raised-button color="primary" *ngIf="table.toggle.showAddRowButton" (click)="addRow()" matTooltip="ajouter ligne">
+      <mat-icon>add</mat-icon> Ajouter ligne
+    </button>
+    <button mat-raised-button color="primary" *ngIf="table.toggle.showAddColumnButton " (click)="addColumn()" matTooltip="ajouter colonne">
+      <mat-icon>add</mat-icon> Ajouter colonne
+    </button>
+    <button mat-raised-button color="primary" *ngIf="table.toggle.showPaginationToggle" (click)="togglePagination()">
+      {{ paginationEnabled ? 'Annuler pagination' : 'Ajouter pagination' }}
+    </button>
+    <button mat-raised-button color="primary" *ngIf="table.toggle.showFilteringToggle" (click)="toggleFiltering()">
+      {{ filteringEnabled ? 'Annuler filtrage' : 'Ajouter filtrage' }}
+    </button>
+    <button mat-raised-button color="primary" *ngIf="table.toggle.showImportExcel " (click)="fileInput.click()"> <mat-icon>file_upload</mat-icon> Importer Excel</button>
+    <input type="file" #fileInput (change)="onFileChange($event)" accept=".xlsx, .xls" style="display: none;" />
+
+    <button mat-raised-button color="primary" *ngIf="table.toggle.showExportExcel" (click)="exportToExcel()" matTooltip="Exporter vers Excel">
+      <mat-icon>file_download</mat-icon> Exporter Excel
+    </button>
+
+    <mat-form-field appearance="fill" color="primary" *ngIf="table.toggle.showSelect">
+      <mat-label>Visual</mat-label>
+      <mat-select (selectionChange)="onVisualChange($event.value)">
+        <mat-option *ngFor="let visual of visuals" [value]="visual">
+          {{ visual.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" color="primary" *ngIf="table.toggle.showCategories">
+      <mat-label>categories</mat-label>
+    <mat-select  (selectionChange)="onCategoryChange($event.value)">
+      <mat-option *ngFor="let category of categories" [value]="category.id">
+        {{ category.name }}
+      </mat-option>
+    </mat-select></mat-form-field>
+    <mat-form-field appearance="fill" color="primary"   *ngIf="showTable && table.toggle.showCategories ">
+      <mat-label>tables</mat-label>
+      <mat-select  (selectionChange)="onTableChange($event.value)">
+      <mat-option *ngFor="let table of tables" [value]="table.id">
+        {{ table.name }}
+      </mat-option>
+    </mat-select></mat-form-field>
+
+    <button mat-raised-button color="primary" *ngIf="integartionBD" (click)="integrateWithDatabase()">
+      Intégration avec la base de données
+    </button>
+
+</div> </div></div>

@@ -1,0 +1,43 @@
+body {
+  font-family: 'Pattaya';
+  font-size: 22px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.CSS_headline {
+  margin-top: 80px;
+  color: #000000;
+  padding: 50px 20px;
+  overflow: hidden;
+}
+
+h1 {
+  font-size: 2.2em;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+}
+
+.CSS_cta-button {
+  margin-top: 20px;
+  display: inline-block;
+  background-color: #3990dc;
+  color: #fff;
+  font-size: 1.1em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.CSS_cta-button:hover {
+  background-color: #0e1f7c;
+}
+

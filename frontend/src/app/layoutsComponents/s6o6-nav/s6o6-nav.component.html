@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.3/font/bootstrap-icons.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="CSS_navbar">
+  <div class="CSS_navbar-logo" routerLink="/">CleverFlow</div>
+  <div class="CSS_navbar-items">
+    <div class="CSS_navbar-item" routerLink="/">Home</div>
+    <div class="CSS_navbar-item" routerLink="/GestionDB/">Create</div>
+    <div class="CSS_navbar-item" routerLink="/websites">My websites</div>
+    <div class="CSS_navbar-item">Themes</div>
+  </div>
+  <div *ngIf="VarB_isLogin; else loggedOut" class="navbar-right">
+    <i class="fa fa-user" aria-hidden="true"></i>
+    <span class="CSS_navbar-item">{{ userService.currentUserValue?.full_name }}</span>
+    <button class="CSS_login-button" (click)="TS_toggleLogoutWindow()">SIGN OUT</button>
+  </div>
+  <ng-template #loggedOut>
+    <div class="CSS_navbar-item">
+      <button class="CSS_login-button" (click)="TS_navigateToSignup()">SIGN UP</button>
+    </div>
+  </ng-template>
+</nav>
+<div *ngIf="VarB_showLogoutWindow" class="CSS_logout-window">
+  <div class="CSS_logout-content">
+    <i class="bi bi-person-circle"></i>
+    <span>{{ userService.currentUserValue?.full_name }}</span>
+    <button class="CSS_logout-button" (click)="TS_Logout()">SIGN OUT</button>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!-- NIv 7 from db dialog -->
+<h2>Database Connection Details</h2>
+<form [formGroup]="VarTab_databaseForm" (ngSubmit)="TS_onSubmit()" class="form">
+  <div class="form-group">
+    <label for="VarS_databaseName">Database Name</label>
+    <input type="text" id="VarS_databaseName" class="form-control" formControlName="VarS_databaseName">
+  </div>
+  <div class="form-group">
+    <label for="VarS_username">Username</label>
+    <input type="text" id="VarS_username" class="form-control" formControlName="VarS_username">
+  </div>
+  <div class="form-group">
+    <label for="VarS_password">Password</label>
+    <input type="password" id="VarS_password" class="form-control" formControlName="VarS_password">
+  </div>
+  <div class="form-group">
+    <label for="VarS_host">Host</label>
+    <input type="text" id="VarS_host" class="form-control" formControlName="VarS_host">
+  </div>
+  <div class="form-group">
+    <label for="VarN_port">Port</label>
+    <input type="text" id="VarN_port" class="form-control" formControlName="VarN_port">
+  </div>
+  <div class="btns">
+    <button type="submit" class="btn btn-primary">Next</button>
+    <button type="button" class="btn btn-secondary" (click)="TS_closeDialog()">Cancel</button>
+  </div>
+</form>

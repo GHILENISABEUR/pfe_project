@@ -1,0 +1,24 @@
+<div  *ngIf="joinedData.length > 0">
+  <button class="unfilter_btn" (click)="TS_resetFilter()">remove Filter</button>
+
+  <div class="tables-and-navigation">
+    <div class="tables">
+      <div class="table" *ngFor="let table of selectedFieldsByTableId | keyvalue">
+        <h2 class="rectangle title">Table {{ transformTableName(tableIdToNameMap[table.key])}}</h2>
+        <table>
+          <tr>
+            <th *ngFor="let field of table.value">{{ field.name }}</th>
+          </tr>
+          <tr *ngFor="let row of uniqueTableData[table.key]">
+            <td  class="cell" *ngFor="let field of table.value">
+              <span (click)="TS_filterData(field.name, row[field.name.toLowerCase()])">{{ row[field.name.toLowerCase()] }}</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="joinedData.length === 0">
+  <p>No data to display.</p>
+</div>

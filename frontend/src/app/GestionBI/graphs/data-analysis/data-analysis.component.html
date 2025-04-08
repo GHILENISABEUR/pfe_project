@@ -1,0 +1,196 @@
+<div class="button-container">
+  <button class="back-button" (click)="goBack()">Return</button>
+  <button class="button" [routerLink]="'/GestionDB/'+websiteId">Gestion DB</button>
+  <button class="button" [routerLink]="'/making-app/'+websiteId">Gestion UI</button>
+  <button class="button" [routerLink]="'/GestionBI/'+websiteId">Gestion BI</button>
+</div>
+
+
+<div class="add-graph-buttons" *ngIf="selectedSidebarItem ">
+  <button class="add-graph-button" (click)="openAddGraphInterface()">Add Graph</button>
+  <button class="data-button" (click)="onDataClick()">Data</button>
+  <button class="filters-button" (click)="onFiltersClick()">Filters</button>
+</div>
+<!--ch-->
+
+<div class="content-wrapper">
+  <div class="left-space"><app-sidebar-graphs
+    [websiteId]="websiteId"
+    (itemSelected)="onSidebarItemSelect($event)"></app-sidebar-graphs></div>
+    <app-file-upload *ngIf="selectedSidebarItem " [sidebarItemId]="selectedSidebarItem.id"></app-file-upload>
+
+    <div class="cards-list">
+      <div *ngFor="let graph of graphs; let index = index"
+           class="graph-card"
+           [id]="'graph-' + index"
+           cdkDrag
+           (cdkDragStarted)="onDragStart(index)"
+           [cdkDragDisabled]="isResizing"
+           (cdkDragEnded)="onDragEnd($event, index)">
+        <div class="card"
+             [style.position]="'absolute'" [style.width.px]="graph.width" [style.height.px]="graph.height">
+          <div class="card-header">
+            <span class="graph-title">{{ graph.Img_Name || graph.File_Name }}</span>
+            <button class="delete-button" (click)="deleteGraph(graph.Img_Id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <div class="card-body" (click)="getcode(index)">
+            <img [src]="graph.img_url || '../assets/no-graph.jpg'" alt="Graph Image" class="graph-img" />
+          </div>
+          <!-- Resizable Handle -->
+          <div class="resizer" (mousedown)="onResizeStart($event, index)"></div>
+        </div>
+      </div>
+    </div>
+
+
+  <div class="right-space"></div>
+</div>
+
+<div class="bg" *ngIf="showCodeIsOpen || addCodeFormIsOpen">
+  <div class="testbox">
+    <mat-tab-group [selectedIndex]="selected.value" class="tabsHeading fixed-width-tabs" [dynamicHeight]="true">
+      <div cdkDropList (cdkDropListDropped)="dropTab($event)">
+        <mat-tab *ngFor="let tab of lotsOfTabs; let i = index">
+          <div cdkDrag [cdkDragData]="tab">
+            <ng-template mat-tab-label>
+              <div class="tab-label-content">
+                <!-- Name Displayed Before Editing -->
+                <span *ngIf="!tab.isEditing" class="tab-title">{{ tab.File_Name || tab.Img_Name }}</span>
+
+                <!-- Input Group for Editing -->
+                <div *ngIf="tab.isEditing" class="input-group">
+                  <input
+                    [(ngModel)]="tab.File_Name"
+                    class="form-control edit-input"
+                    (keydown.enter)="saveTabName(tab)"
+                    (keydown.esc)="cancelEdit(tab)"
+                  />
+                  <div class="input-group-append">
+                    <button mat-icon-button class="save-tab-button" (click)="saveTabName(tab)">
+                      <mat-icon>save</mat-icon>
+                    </button>
+                    <button mat-icon-button class="cancel-tab-button" (click)="cancelEdit(tab)">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Edit and Close Buttons -->
+                <button mat-icon-button class="edit-tab-button" *ngIf="!tab.isEditing" (click)="enableEdit(tab)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button class="close-tab-button" (click)="closeTab(i)">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </ng-template>
+            <!-- <app-python-compiler
+              *ngIf="showCodeIsOpen"
+              [editable]="true"
+              [codeGraph]="tab"
+              [reponse_id]="tab.Reponse_Id"
+              [sideBarItemid]="selectedSidebarItem.id"
+              (closePopUp)="handleClosePopUp()"
+              (GraphTab)="openGraphTab($event)"
+              (onCompilationSuccess)="handleCompilationSuccess($event)"
+              >
+            </app-python-compiler> -->
+            <app-python-compiler
+  *ngIf="showCodeIsOpen"
+  [editable]="true"
+  [codeGraph]="tab"
+  [reponse_id]="tab.Reponse_Id"
+  [sideBarItemid]="selectedSidebarItem.id"
+
+  (closePopUp)="handleClosePopUp()"
+  (GraphTab)="openGraphTab($event)"
+  (onCompilationSuccess)="handleCompilationSuccess($event)">
+</app-python-compiler>
+
+            <!-- <app-python-compiler *ngIf="addCodeFormIsOpen" [reponse_id]="responseSelected" (closePopUp)="openAddCode()" (onCompilationSuccess)="handleCompilationSuccess($event)" ></app-python-compiler>
+            <app-python-compiler></app-python-compiler> -->
+
+          </div>
+        </mat-tab>
+      </div>
+    </mat-tab-group>
+  </div>
+</div>
+
+
+<!-- <div class="toilet-paper-container"> -->
+  <!-- Support du rouleau -->
+  <!-- <div class="support">
+    <div class="bar"></div>
+    <div class="holder"></div>
+  </div> -->
+
+  <!-- Rouleau -->
+  <!-- <div class="roll" [style.transform]="rollTransform">
+    <div class="hole"></div>
+  </div> -->
+
+  <!-- Papier déroulant -->
+  <!-- <div
+    class="paper"
+    [style.height.px]="paperHeight"
+    [style.backgroundImage]="'url(assets/toilet-paper-texture.png)'"
+    (mousedown)="startScrolling($event)"
+    (mousemove)="onScroll($event)"
+    (mouseup)="stopScrolling()"
+    (mouseleave)="stopScrolling()"
+  ></div>
+</div>
+<div class="carousel-container">
+  <div class="circle"></div>
+  <button (click)="prevImage()" class="nav-button left">❮</button>
+  <div class="carousel">
+    <div
+      class="image-container"
+      *ngFor="let organ of organs; let i = index"
+      [class.active]="i === activeIndex"
+      [class.left]="i === (activeIndex - 1 + organs.length) % organs.length"
+      [class.right]="i === (activeIndex + 1) % organs.length"
+    >
+      <img [src]="organ.src" [alt]="organ.name" />
+    </div>
+  </div>
+  <button (click)="nextImage()" class="nav-button right">❯</button>
+</div> -->
+
+
+
+
+
+
+<div *ngFor="let segment of selectedSegments; let i = index" class="unique-values-panel resizable draggable" cdkDrag [ngStyle]="{'width.px': width, 'height.px': height}" (cdkDragEnded)="onDragEndd($event)" (mousedown)="onResizeStartt($event)">
+  <div class="draggable-header">
+    <button (click)="onSegmentDeselected(segment.column)">Close</button>
+    <button class="sort-button" (click)="toggleSort(i)">Sort</button>
+  </div>
+  <div class="unique-values-body">
+    <h3>Unique Values for: {{ segment.column }}</h3>
+    <div class="unique-values-list">
+      <button *ngFor="let value of getSortedUniqueValues(segment, i)"  (click)="onUniqueValueClicked(segment.column, value, $event)" [ngClass]="{'selected': segment.uniqueValues.includes(value)}" class="unique-value-button">
+        {{ value }}
+        <span *ngIf="segment.unique_values_selected"><mat-icon *ngIf="segment.unique_values_selected.includes(value)">check</mat-icon></span>
+        <!-- <span *ngIf="uniqueValues.includes(value)">✔</span> -->
+      </button>
+    </div>
+  </div>
+  <div class="resize-handle"></div>
+</div>
+
+<div *ngIf="filtersVisible" class="filters-section">
+  <button class="filters-btn" (click)="openSegmentsFilterPopup()">Segments Filter</button>
+  <button class="filters-btn" (click)="openChronologyFilterPopup(this.selectedFile)">Chronology Filter</button>
+</div>
+
+<!-- File Upload Component -->
+
+
+<!-- Filters Selection Component -->
+<app-filters-selection *ngIf="filtersVisible" [selectedFile]="selectedFile"></app-filters-selection>
+

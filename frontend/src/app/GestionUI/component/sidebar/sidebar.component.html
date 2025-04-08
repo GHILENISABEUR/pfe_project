@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="add-sidebar-container">
+    <button class="add-sidebar-button" (click)="addSidebar()">
+      <fa-icon [icon]="faPlus"></fa-icon> Add Sidebar
+    </button>
+  </div>
+
+  <div class="sidebars-container">
+    <ng-container *ngFor="let sidebar of sidebars">
+      <ng-container *ngIf="sidebar.isDisplayed">
+        <div class="sidebar-wrapper" [class.active]="sidebar === activeSidebar || sidebar === defaultSidebar">
+          <app-sidebar-instance 
+            [sidebar]="sidebar" 
+            (delete)="deleteSidebar($event)" 
+            (itemSelect)="onItemSelect($event)">
+          </app-sidebar-instance>
+        </div>
+      </ng-container>
+    </ng-container>
+    
+  </div>
+</div>

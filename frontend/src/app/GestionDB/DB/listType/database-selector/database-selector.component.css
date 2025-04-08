@@ -1,0 +1,8 @@
+.form , h2{
+    margin:30px;
+}
+.btns {
+    margin-top:20px;
+    display:flex;
+    gap:30px;
+}

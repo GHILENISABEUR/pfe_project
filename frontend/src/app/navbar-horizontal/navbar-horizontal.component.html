@@ -1,0 +1,170 @@
+<!--<ng-template #recursiveMoveList let-children>
+  <li *ngFor="let child of children">
+    <button (click)="selectedItem && moveItemToParent(selectedItem, child)">
+      {{ child.title }}
+    </button>
+    <ul *ngIf="child.children?.length">
+      <ng-container *ngTemplateOutlet="recursiveMoveList; context: { $implicit: child.children }"></ng-container>
+    </ul>
+  </li>
+</ng-template>
+
+<div class="navbar-horizontal">
+  <div class="navbar-header">
+    <button class="settings-button" (click)="toggleSettingsMenu()">Settings</button>
+  </div>
+  <button *ngIf="enableAddParent" class="add-root-btn" (click)="addItem(null)">Add Root Item</button>
+  <div cdkDropListGroup class="navbar-list">
+    <div cdkDropList class="navbar-items" (cdkDropListDropped)="drop($event, navbarItems)">
+      <div *ngFor="let item of navbarItems" cdkDrag class="navbar-item">
+        <div class="navbar-item-content" [class.editing]="item.isEditing">
+          <ng-container *ngIf="!item.isEditing">
+            <div class="item-header">
+              <button *ngIf="item.children?.length" class="toggle-children-button" (click)="toggleChildrenVisibility(item)">
+                <fa-icon [icon]="item.isExpanded ? faChevronDown : faChevronRight"></fa-icon>
+              </button>
+              <span>{{ item.title }} ({{ item.order }})</span>
+              <button class="options-button" (click)="toggleOptionMenu($event, item.id)">
+                &#x22EE;
+              </button>
+            </div>
+            <div class="item-buttons" [class.visible]="openOptionMenuId === item.id" [attr.data-item-id]="item.id">
+              <button *ngIf="enableAddChild" (click)="addItem(item)">
+                <fa-icon [icon]="faPlus"></fa-icon>
+              </button>
+              <button *ngIf="enableEdit" (click)="editItem(item)">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </button>
+              <button *ngIf="enableDelete" (click)="deleteItem(item)">
+                <fa-icon [icon]="faTimes"></fa-icon>
+              </button>
+              <button *ngIf="enableMoveToParent" (click)="openMoveModal(item)">
+                Move
+              </button>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="item.isEditing">
+            <div class="form-group edit-input">
+              <input type="text" [(ngModel)]="item.title" placeholder="Title" />
+            </div>
+            <div class="form-group edit-input">
+              <input type="text" [(ngModel)]="item.url" placeholder="URL" />
+            </div>
+            <button class="save-btn" (click)="saveItem(item)">Save</button>
+          </ng-container>
+        </div>
+        <div *ngIf="item.isExpanded" class="navbar-children" cdkDropList (cdkDropListDropped)="drop($event, item.children)">
+          <ng-container [ngTemplateOutlet]="recursiveList" [ngTemplateOutletContext]="{ $implicit: item.children }"></ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="moveModal" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="closeMoveModal()">&times;</span>
+    <h2>Select a new parent for {{ selectedItem?.title }}</h2>
+    <div class="modal-body">
+      <ul class="modal-list">
+        <li *ngFor="let rootItem of filteredNavbarItems">
+          <button (click)="selectedItem && moveItemToParent(selectedItem, rootItem)">
+            {{ rootItem.title }}
+          </button>
+          <ul *ngIf="rootItem.children?.length">
+            <ng-container *ngTemplateOutlet="recursiveMoveList; context: { $implicit: rootItem.children }"></ng-container>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="settingsMenuVisible" class="settings-menu">
+  <div class="toggle-controls" *ngIf="!isStyleMenuVisible">
+    <label>
+      <span>Add Parent</span>
+      <input type="checkbox" [(ngModel)]="enableAddParent">
+    </label>
+    <label>
+      <span>Add Child</span>
+      <input type="checkbox" [(ngModel)]="enableAddChild">
+    </label>
+    <label>
+      <span>Edit Item</span>
+      <input type="checkbox" [(ngModel)]="enableEdit">
+    </label>
+    <label>
+      <span>Delete Item</span>
+      <input type="checkbox" [(ngModel)]="enableDelete">
+    </label>
+    <label>
+      <span>Reorder Items</span>
+      <input type="checkbox" [(ngModel)]="enableReorder">
+    </label>
+    <label>
+      <span>Move to Parent</span>
+      <input type="checkbox" [(ngModel)]="enableMoveToParent">
+    </label>
+    <button (click)="showStyleMenu()">Style</button>
+  </div>
+
+  <div class="style-menu" *ngIf="isStyleMenuVisible">
+    <h3>Select Theme</h3>
+    <div class="theme-options">
+      <button class="theme-button default-theme" (click)="applyTheme('default')">Default</button>
+      <button class="theme-button nature-theme" (click)="applyTheme('nature')">Nature</button>
+      <button class="theme-button modern-theme" (click)="applyTheme('modern')">Modern</button>
+      <button class="theme-button dark-theme" (click)="applyTheme('dark')">Dark</button>
+      <button class="theme-button light-theme" (click)="applyTheme('light')">Light</button>
+    </div>
+    <button class="back-button" (click)="showToggleMenu()">Back</button>
+  </div>
+</div>
+
+<ng-template #recursiveList let-children>
+  <div cdkDropList class="navbar-children-list" (cdkDropListDropped)="drop($event, children)">
+    <div *ngFor="let child of children" cdkDrag class="navbar-item">
+      <div class="navbar-item-content" [class.editing]="child.isEditing">
+        <ng-container *ngIf="!child.isEditing">
+          <div class="item-header">
+            <button *ngIf="child.children?.length" class="toggle-children-button" (click)="toggleChildrenVisibility(child)">
+              <fa-icon [icon]="child.isExpanded ? faChevronDown : faChevronRight"></fa-icon>
+            </button>
+            <span>{{ child.title }} ({{ child.order }})</span>
+            <button class="options-button" (click)="toggleOptionMenu($event, child.id)">
+              &#x22EE;
+            </button>
+          </div>
+          <div class="item-buttons" [class.visible]="openOptionMenuId === child.id" [attr.data-item-id]="child.id">
+            <button *ngIf="enableAddChild" (click)="addItem(child)">
+              <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
+            <button *ngIf="enableEdit" (click)="editItem(child)">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+            <button *ngIf="enableDelete" (click)="deleteItem(child)">
+              <fa-icon [icon]="faTimes"></fa-icon>
+            </button>
+            <button *ngIf="enableMoveToParent" (click)="openMoveModal(child)">
+              Move
+            </button>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="child.isEditing">
+          <div class="form-group edit-input">
+            <input type="text" [(ngModel)]="child.title" placeholder="Title" />
+          </div>
+          <div class="form-group edit-input">
+            <input type="text" [(ngModel)]="child.url" placeholder="URL" />
+          </div>
+          <button class="save-btn" (click)="saveItem(child)">Save</button>
+        </ng-container>
+      </div>
+      <div *ngIf="child.isExpanded" class="navbar-children" cdkDropList (cdkDropListDropped)="drop($event, child.children)">
+        <ng-container [ngTemplateOutlet]="recursiveList" [ngTemplateOutletContext]="{ $implicit: child.children }"></ng-container>
+      </div>
+    </div>
+  </div>
+</ng-template>
+-->

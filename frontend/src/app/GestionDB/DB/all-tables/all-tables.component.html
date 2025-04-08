@@ -1,0 +1,94 @@
+<!-- Niv2 -->
+
+<div class="flex-container">
+  <div class="container" draggable="true" (dragstart)="TS_DragStart($event)" (dragend)="TS_DragEnd($event)">
+    <div *ngIf="tables.length; else noTables">
+      <ul>
+        <li *ngFor="let table of tables" class="table-name" (click)="TS_SelectTable(table)" [class.selected]="selectedTable === table">
+          <div class="name-and-buttons">
+            <span class="table-name-text">{{ table.name }}</span>
+            <div class="actionButons" *ngIf="table.category==nonClassifiedCategory.id && !showManagementButtons">
+              <button type="button" class="btn btn-danger btn-sm" (click)="$event.stopPropagation(); showCategorySelect = true;">
+                <img src="assets/restore.png" alt="restore" draggable="false" style="width: 20px; height: 20px;">
+              </button>
+            </div>
+            <div class="action-buttons" *ngIf="showManagementButtons">
+              <button type="button" class="btn btn-danger btn-sm" (click)="TS_EditTable(table.id, table.name);">
+                <img src="assets/pen.png" alt="Edit" draggable="false" style="width: 20px; height: 20px;">
+              </button>
+              <button type="button" class="btn btn-danger btn-sm" (click)="TS_DeleteTable($event, table.id); $event.stopPropagation();">
+                <img src="assets/delete.png" alt="Delete" draggable="false" style="width: 20px; height: 20px;">
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="select-category-restore" *ngIf="showCategorySelect && !showManagementButtons" >
+    <select class="form-control"  (change)="TS_HandleCategoryChange($event)">
+      <option *ngFor="let category of categories" [value]="category.id" [disabled]="category.id === 0">
+        {{ category.name }}
+      </option>
+    </select>
+    <div class="restore-btns">
+      <button type="button" class="btn btn-primary" id="restore-btn" *ngIf="showCategorySelect && selectedRestoreCategory" (click)="TS_RestoreTable()">
+        Restore
+      </button>
+      <button type="button" class="btn btn-danger" id="cancel-btn" *ngIf="showCategorySelect" (click)="showCategorySelect = false">
+        <img src="assets/close.png" alt="Cancel" draggable="false" class="btn-icon">
+      </button>
+    </div>
+
+  </div>
+    <!-- Gestion div that acts like a button -->
+
+
+    <!-- Toggle button for showing/hiding the create form -->
+    <div class="toggle-button-container" *ngIf="showManagementButtons && !isEditing">
+      <button type="button" class="btn btn-create" (click)="showCreateForm = !showCreateForm">
+        <img [src]="showCreateForm ? 'assets/delete (1).png' : 'assets/add (1).png'" alt="{{ showCreateForm ? 'Collapse' : 'Expand' }}" draggable="false">
+      </button>
+      <button type="button" class="btn btn-create" (click)="TS_ImportFromDB()">
+        <img  src="assets/database.png">
+      </button>
+    </div>
+
+    <!-- Form for creating or editing a table -->
+    <form [formGroup]="tableForm" *ngIf="(showCreateForm || isEditing) && showManagementButtons">
+      <div class="form-group">
+        <div class="input-group">
+          <input type="text" id="tableName" formControlName="name"  placeholder="Enter table name">
+          <!-- Display validation error message -->
+           <div class="side">
+          <div *ngIf="tableForm.get('name')?.hasError('tableNameExists')" class="text-danger">
+            Table name already exists in this category.
+          </div>
+          <!-- Button to create a new table -->
+          <button type="button" id="create-btn" (click)="TS_SubmitForm()" *ngIf="!isEditing" class="btn btn-primary">
+            <img src="assets/check.png" alt="Create" draggable="false" class="btn-icon">
+          </button>
+          <!-- Save and Cancel buttons for editing -->
+          <div *ngIf="isEditing" class="edit-buttons">
+            <button type="button" (click)="TS_SubmitForm()" class="btn btn-success">
+              <img src="assets/save.png" alt="Save" draggable="false" class="btn-icon">
+            </button>
+            <button type="button" (click)="TS_CancelEdit()" class="btn btn-danger">
+              <img src="assets/close.png" alt="Cancel" draggable="false" class="btn-icon">
+            </button>
+          </div>
+        </div>
+
+        </div>
+      </div>
+    </form>
+
+    <div class="gestion-button" (click)="TS_ToggleManagementButtons()">Gestion</div>
+
+    <ng-template #noTables>
+      <p>No tables found.</p>
+    </ng-template>
+  </div>
+  <div *ngIf="showS6o4o6Tab" class="container larger-container" draggable="true" (dragstart)="TS_DragStart($event)" (dragend)="TS_DragEnd($event)">
+    <app-conception-table *ngIf="showS6o4o6Tab" [selectedTable]="selectedTable" (closeTab)="TS_closeS6o4o6Tab()"></app-conception-table>
+  </div>
+</div>

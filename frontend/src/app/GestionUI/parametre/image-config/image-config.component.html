@@ -1,0 +1,19 @@
+<div class="image-config-container" *ngIf="image" cdkDrag>
+    <button class="close-button" (click)="closeConfigContainer()">X</button>
+    <label>
+      Width:
+      <select [(ngModel)]="selectedWidth" (change)="updateImageStyleFromSelect()">
+        <option *ngFor="let size of predefinedSizes" [value]="size">{{ size }}</option>
+      </select>
+      <input type="text" [(ngModel)]="image.style['width']" (ngModelChange)="updateImageStyle()">
+    </label>
+    <label>
+      Height:
+      <select [(ngModel)]="selectedHeight" (change)="updateImageStyleFromSelect()">
+        <option *ngFor="let size of predefinedSizes" [value]="size">{{ size }}</option>
+      </select>
+      <input type="text" [(ngModel)]="image.style['height']" (ngModelChange)="updateImageStyle()">
+    </label>
+    <button (click)="deleteImage()">Delete Image</button>
+  </div>
+  

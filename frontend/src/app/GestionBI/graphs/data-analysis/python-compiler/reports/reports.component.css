@@ -1,0 +1,169 @@
+.blocDataHeader div{
+    background-color: #003865;
+    color: aliceblue;
+border-radius: 20px;
+width: 30%;
+margin: 1%;
+padding: 1%;
+}
+
+
+
+.blocData div{
+border: solid #003865;
+border-radius: 20px;
+width: 30%;
+margin: 1%;
+padding: 1%;
+}
+input ,textarea{
+    margin: 2%;
+}
+
+.item{
+    width: 100% !important;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+}
+
+.item:hover{
+    background-color: #003865;
+    color: aliceblue;
+}
+
+.selected{
+    background-color: #01559a;
+    color: aliceblue;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 20;
+    cursor: pointer;
+
+  }
+
+  .addBtn:hover{
+    color: #003865;
+  }
+
+  .deleteBtn:hover{
+    color: #bf0808;
+  }
+  .btnBloc{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+  }
+
+
+  .tableAction{
+    border: #003865 solid;
+    border-radius: 20px;
+    margin: 10px 0;
+  }
+  
+  button {
+    width: 150px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px; 
+    background: #003865;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    margin: 10px;
+    }
+    button:hover {
+    background: #607EAA;
+    }
+
+
+    .bg{
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1040;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(15px);
+    }
+    
+
+    .blocData {
+      display: flex; /* Use flexbox to align children in a row */
+      flex-wrap: nowrap; /* Prevent wrapping to a new line */
+      justify-content: space-between; /* Add space between the columns */
+  }
+  
+  .blocDataHeader {
+      display: flex; /* Use flexbox to align children in a row */
+      flex-wrap: nowrap; /* Prevent wrapping to a new line */
+      justify-content: space-between; /* Add space between the columns */
+  }
+  
+  .blocDataHeader .col-4,
+  .blocData .col-4 {
+      flex: 1; /* Distribute the columns equally */
+  }
+  
+  .blocDataHeader div,
+  .blocData div {
+     
+      border-radius: 20px;
+  }
+  
+  
+  .blocData div {
+  border: solid #003865;
+  border-radius: 20px;
+  width: 100%; /* Adjusted to take full width */
+  margin: 1%;
+  padding: 1%;
+  max-height: 250px; /* Set the maximum height for each section */
+  overflow-y: auto; /* Enable vertical scrolling if content exceeds the max height */
+  overflow-x: hidden; /* Disable horizontal scrolling */
+  box-sizing: border-box; /* Ensure padding and border are included in the element's width and height */
+  position: relative; /* Ensure the scrollbar is confined within the element */
+}
+
+/* Adjust scrollbar styles */
+.blocData div::-webkit-scrollbar {
+  width: 8px; /* Adjust the width of the scrollbar */
+  border-radius: 20px; /* Ensure the scrollbar fits within the container's border radius */
+}
+
+.blocData div::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the scrollbar track */
+  border-radius: 20px; /* Ensure the scrollbar fits within the container's border radius */
+}
+
+.blocData div::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar thumb */
+  border-radius: 20px; /* Ensure the scrollbar fits within the container's border radius */
+  border: 2px solid #f1f1f1; /* Adds padding around the thumb */
+}
+
+.blocData div::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Darker thumb color on hover */
+}
+
+/* For Firefox */
+.blocData div {
+  scrollbar-width: thin; /* Makes the scrollbar thinner */
+  scrollbar-color: #888 #f1f1f1; /* Thumb color and track color */
+  border-radius: 20px; /* Ensure the scrollbar fits within the container's border radius */
+}
+
+/* Hide the scrollbar on overflow for modern browsers */
+.blocData div::-webkit-scrollbar-corner {
+  display: none;
+}

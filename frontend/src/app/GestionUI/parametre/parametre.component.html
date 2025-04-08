@@ -1,0 +1,90 @@
+<!--
+<div class="settings-design">
+    <div *ngIf="openSettingsNavBar">
+        
+        <button (click)="addButtonToNavBar()">Add Button to Navbar</button>
+      </div>
+      <div *ngIf="isButtonNavBar">
+        <select [(ngModel)]="selectedFrameId">
+            <option *ngFor="let frame of frames" [value]="frame.id">{{ frame.title }}</option>
+          </select>
+        <button (click)="TS_Relier_btn_frame()">relier le button</button>
+      </div>
+      
+    <div  *ngIf="openFormFrameEdit">
+        <div class="closebtn" (click)="openFormFrameEdit = false"><i class="fa-solid fa-x"></i></div>
+        <div class="form" [formGroup]="frameDetails">
+            <label>Title</label>
+            <br>
+            <input type="text" placeholder="write frame title" formControlName="title">
+            <br>
+            <label>route</label>
+            <br>
+            <input type="text" placeholder="write frame route" formControlName="route">
+            <br>
+           
+            <button class="save" (click)="TS_SaveFrameDetails()">save</button>
+            <button class="save" (click)="TS_DeleteFrame()" style="background-color:red;">delete</button>
+        </div>
+    </div>
+    
+    <div *ngIf="openSettingsText">
+        <input *ngIf="openText" type="text" placeholder="write your text .." (input)="TS_SetTextToElement($event)"
+        [value]="textInputSettingsValue" />
+        <div class="label" *ngIf="openText">Text</div>
+            <div class="bgcolorbtn">
+                <div class="indcolor" #bgpicker (click)="openBgPicker = !openBgPicker;openTextPicker = false"></div>
+                <p>Background color</p>
+                <div class="colorspickerbg"
+                    [ngStyle]="{opacity:openBgPicker ? '1' :'0',pointerEvents:openBgPicker ? 'all' :'none'}">
+                    <div class="color" (click)="TS_SetBackgroundColor(color)" *ngFor="let color of colors"
+                        [ngStyle]="{backgroundColor:color}"></div>
+                </div>
+            </div>
+            <div class="bgcolorbtn">
+                <div class="indcolor" #txtpicker (click)="openTextPicker = !openTextPicker;openBgPicker = false">
+                </div>
+                <p>Text color</p>
+                <div class="colorspickertxt"
+                    [ngStyle]="{opacity:openTextPicker ? '1' :'0',pointerEvents:openTextPicker ? 'all' :'none'}">
+                    <div class="color" (click)="TS_ChangeTextColor(color)" *ngFor="let color of colors"
+                        [ngStyle]="{backgroundColor:color}"></div>
+                </div>
+        </div>
+        <button (click)="TS_RemoveElement()">delete item</button>
+    </div>
+    <div *ngIf="isButtonActive">
+        <label for="actionSelect">Action:</label>
+        <select id="actionSelect" (change)="onComboBoxChange($event)">
+          <option value="ajouter">Ajouter</option>
+          <option value="modifier">Modifier</option>
+          <option value="supprimer">Supprimer</option>
+          <option value="afficher">Afficher</option>
+        </select>
+    </div>
+    <div *ngIf="openSettingsInput">
+        <div>
+          <label for="textInput">Text:</label>
+          <input id="textInput" [(ngModel)]="textInputSettingsValue" type="text">
+        </div>
+
+        <div>
+          <label for="colorInput">Text Color:</label>
+          <input id="colorInput" [(ngModel)]="colorInputSettingsValue" type="color">
+        </div>
+
+        <div>
+          <label for="backgroundColorInput">Background Color:</label>
+          <input id="backgroundColorInput" [(ngModel)]="backgroundColorInputSettingsValue" type="color">
+        </div>
+
+            <button (click)="updateElementSettings()">Update Element</button>
+            <button (click)="TS_DeleteInput()">Delete item</button>
+
+      </div>
+    </div>
+    
+    
+        <div class="hr"></div>
+
+        <app-table-config *ngIf="TableService.selectedTable" class="edit-frame-details"></app-table-config>-->

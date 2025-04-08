@@ -1,0 +1,84 @@
+.sidebar {
+  overflow: hidden;
+  background-color: #002060;
+  height: 100vh; /* Full height of the viewport */
+  position: fixed; /* Make sidebar fixed position to always be visible */
+  transition: width 0.5s; /* Smooth transition for sidebar width */
+  box-shadow: 2px 0 10px rgba(0,0,0,0.5); /* Adds shadow to the right of the sidebar */
+  color: white;
+  z-index: 1000; /* High z-index to keep the sidebar above other content */
+}
+.sidebar li {
+  display: flex; /* Enables flexbox */
+  flex-direction: column; /* Stacks children (icon and label) vertically */
+  align-items: center; /* Centers children horizontally within the list item */
+  justify-content: center; /* Optional: Centers children vertically if needed */
+  padding: 20px; /* Padding adjusted for demonstration */
+  cursor: pointer;
+}
+
+
+.sidebar ul {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0; /* Remove default padding */
+  height: 50%; /* Take full height of sidebar */
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center;
+}
+
+
+
+.sidebar li:hover {
+  background-color: #aaaaf4; /* Change background on hover */
+}
+
+
+.icon {
+  font-size: 24px; /* Icon size, adjust if needed */
+  display: inline-block; /* Helps with alignment */
+  vertical-align: middle; /* Align icon vertically in line */
+}
+.fa-database {
+  color: inherit;
+  font-size: 24px;
+}
+.toggle-button {
+  background: none;
+  border: none;
+  color: white; /* Set the color to white or any color that suits your design */
+  font-size: 20px; /* Adjust size as needed */
+  padding: 10px;
+  cursor: pointer;
+  position: absolute; /* Fix position to top of sidebar */
+  top: 50px; /* Top margin from the sidebar */
+  right: 20px; /* Right margin from the sidebar */
+}
+
+.toggle-button:focus {
+  outline: none; /* Removes the focus outline to keep the UI clean */
+}
+.icon-label {
+  display: block; /* Ensures the label appears below the icon */
+  font-size: 12px;
+  color: white; /* White text color, adjust as needed */
+  margin-top: 7px;
+  text-align: center;
+}
+.website-name {
+  font-family: 'Open Sans', sans-serif; /* Example font */
+  font-size: 20px; /* Adjust size as needed */
+  font-weight: 600; /* Makes text bold */
+  color: white; /* Color of the text */
+  padding: 10px 20px; /* Spacing */
+  text-align: center; /* Centers the text horizontally */
+margin-top: 8px;
+cursor: pointer;
+}
+
+.icon-label, .toggle-button .website-name {
+  font-family: 'Open Sans', sans-serif; /* Consistent font throughout the sidebar */
+}
+.sidebar {
+  font-family: 'Montserrat', sans-serif;
+}

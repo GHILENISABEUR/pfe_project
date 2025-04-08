@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+  <title>CleverFlow Website</title>
+</head>
+<body>
+
+<div class="main-container">
+  <app-s6o9-sidebar></app-s6o9-sidebar>
+  <div class="rest-of-content">
+    <nav class="transparent-navbar">
+      <div class="user-info">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <span>{{ V_authService.currentUserValue?.username }}</span>
+      </div>
+    </nav>
+    <div class="page-content">
+
+      <div class="panel" *ngFor="let section of sections; let i = index">
+        <button (click)="TS_ToggleSection(i)">
+          {{ section.title }}
+          <i class="fa" [ngClass]="{'fa-chevron-up': section.open, 'fa-chevron-down': !section.open}"></i>
+        </button>
+        <div *ngIf="section.open" class="panel-content">
+          <!-- Ensure tables and categories are only in the first section -->
+          <div *ngIf="i === 0" class="cards-container">
+            <div class="card">
+              <div class="card-header">
+                <span class="title">Tables</span>
+                <input type="checkbox" [(ngModel)]="allTablesSelected" (change)="TS_ToggleAllTables()" />
+              </div>
+              <div class="card-body">
+                <ul>
+                  <li *ngFor="let table of tables; let i = index">
+                    <div class="list-item">
+                      <span>{{ table.name }}</span>
+                      <input type="checkbox" [(ngModel)]="tablesSelected[i]" (change)="TS_ToggleTableSelection(i)" />
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <span class="title">Categories</span>
+                <input type="checkbox" [(ngModel)]="allCategoriesSelected" (change)="TS_ToggleAllCategories()" />
+              </div>
+              <div class="card-body">
+                <ul>
+                  <li *ngFor="let category of categories; let i = index">
+                    <div class="list-item">
+                      <span>{{ category.name }}</span>
+                      <input type="checkbox" [(ngModel)]="categoriesSelected[i]" (change)="TS_ToggleCategorySelection(i)" />
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- User list in the second section -->
+          <div *ngIf="i === 1" class="card">
+            <div class="card-header">Users</div>
+            <div class="card-body">
+              <ul>
+                <li *ngFor="let user of users">
+                  <div class="list-item">
+                    <span>{{ user.username }} - {{ user.email }}</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Additional content for other sections -->
+          <div *ngIf="i === 2" >
+            <table class="styled-table">
+              <thead>
+                <tr>
+                  <th>Users</th>
+                  <th>Header 2</th>
+                  <th>Header 3</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td  class="first-column"></td>
+                  <td>.</td>
+                  <td>.</td>
+                </tr>
+                <tr>
+                  <td  class="second-column"></td>
+                  <td>.</td>
+                  <td>.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

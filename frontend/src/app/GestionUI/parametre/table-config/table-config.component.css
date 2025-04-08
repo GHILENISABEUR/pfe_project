@@ -1,0 +1,87 @@
+/* Style for the Configuration Panel */
+.config-panel {
+  padding: 16px;
+  border-radius: 8px;
+}
+
+/* Style for each section within the panel */
+.config-section {
+  margin-bottom: 24px;
+}
+
+/* Style for each item within a section */
+.config-item {
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+/* Header style for each section */
+h3 {
+  font-size: 1.2rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: #ffffff;
+  border-bottom: 2px solid #ffffff;
+  padding-bottom: 4px;
+  margin-bottom: 16px;
+}
+
+.table-controls {
+  display: flex;
+
+  gap: 8px;
+}
+/* Style for font selection options */
+
+.config-itemm{
+  color: #ffffff;
+}
+
+.fixed-bottom-buttons {
+margin: 10px;
+justify-content: center;
+
+}
+/* Custom style for the 'Changer fond du tableau' button */
+.custom-background-button {
+  color: #ffffff; /* Text color */
+  border: 1px solid #ffffff; /* Border color */
+  padding: 8px 16px; /* Padding for the button */
+  border-radius: 4px; /* Rounded corners */
+  font-weight: bold; /* Bold text */
+  /* transition: background-color 0.3s, border-color 0.3s; Smooth transition for hover effects */
+}
+
+.custom-background-button:hover {
+  background-color: #dfdede; /* Background color on hover */
+  border-color: #dfdede; /* Border color on hover */
+}
+
+.custom-background-button:active {
+  background-color: #ad1457; /* Background color on click */
+  border-color: #880e4f; /* Border color on click */
+}
+
+.custom-background-button:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 0 2px rgba(233, 30, 99, 0.5); /* Custom focus outline */
+}
+.custom-form-field .mat-form-field-outline {
+  border-color: #ffffff; /* Couleur de la bordure du champ */
+}
+
+.custom-form-field .mat-form-field-label {
+  color: #ffffff; /* Couleur du texte de l'étiquette */
+}
+
+.custom-form-field .mat-select-trigger {
+  color: #ffffff; /* Couleur du texte du select */
+}
+
+.custom-form-field .mat-option {
+  color: #ffffff; /* Couleur du texte des options du select */
+}
+
+/* Assurez-vous que le fond est visible en ajoutant une couleur de fond appropriée */
+.custom-form-field {
+  background-color: #ffffff; /* Couleur de fond du champ, ajustez selon vos préférences */
+}

@@ -1,0 +1,19 @@
+<h2>Select Table and Field</h2>
+<form class="form" (ngSubmit)="TS_Sce_fetchValues()">
+  <div class="form-group">
+    <label for="VarS_selectedTable">Select Table</label>
+    <select id="VarS_selectedTable" class="form-control" [(ngModel)]="VarS_selectedTable" (change)="TS_Sce_fetchFields()" name="VarS_selectedTable">
+      <option *ngFor="let VarS_table of VarTab_tables" [value]="VarS_table">{{ VarS_table }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="VarS_selectedField">Select Field</label>
+    <select id="VarS_selectedField" class="form-control" [(ngModel)]="VarS_selectedField" name="VarS_selectedField">
+      <option *ngFor="let VarS_field of VarS_fields" [value]="VarS_field">{{ VarS_field }}</option> <!-- Corrected this line -->
+    </select>
+  </div>
+  <div class="btns">
+    <button type="submit" class="btn btn-primary">Fetch Values</button>
+    <button type="button" class="btn btn-secondary" (click)="TS_closeDialog()">Cancel</button>
+  </div>
+</form>

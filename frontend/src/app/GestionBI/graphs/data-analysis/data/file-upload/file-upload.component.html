@@ -1,0 +1,46 @@
+<!-- Main Modal with Two Buttons -->
+<div class="modal" *ngIf="showPopup">
+  <div class="modal-content">
+    <span class="close" (click)="closePopup()">&times;</span>
+
+    <!-- Two Buttons for Import Options -->
+    <div class="import-options-container">
+      <div class="import-options">
+        <button (click)="showExcelFiles()">From Excel</button>
+        <button (click)="showDatabaseFiles()">From Database</button>
+      </div>
+    </div>
+
+
+    <!-- Show File Upload Section (Excel) -->
+    <div *ngIf="showFileUpload">
+      <button (click)="triggerFileInput()" *ngIf="!popupData">Import Excel</button>
+
+      <!-- Display Selected Excel Files -->
+      <table *ngIf="selectedFiles.length > 0">
+        <thead>
+          <tr>
+            <th>File Name</th>
+            <th>Size (KB)</th>
+            <th *ngIf="!popupData">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let file of selectedFiles; let i = index"  (click)="openSegmentsFilterPopup(file.id)">
+            <td>{{ file.name }}</td>
+            <td>{{ file.size  }}</td>
+            <td *ngIf="!popupData">
+              <button mat-icon-button (click)="removeFile(i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+                      </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- Invisible File Input -->
+<input type="file" id="file-input" multiple (change)="handleFileInput($event)" style="display: none;" />

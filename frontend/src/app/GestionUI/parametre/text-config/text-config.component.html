@@ -1,0 +1,25 @@
+<div class="text-config-container" cdkDrag>
+  <button class="close-button" (click)="closeConfigContainer()">X</button>
+  <form [formGroup]="textForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="text">Text:</label>
+      <input id="text" formControlName="text">
+    </div>
+    <div formGroupName="style">
+      <label for="color">Text Color:</label>
+      <input id="color" formControlName="color" type="color">
+      <label for="backgroundColor">Background Color:</label>
+      <input id="backgroundColor" formControlName="backgroundColor" type="color">
+      <label for="fontSize">Font Size:</label>
+      <select id="fontSize" formControlName="fontSize">
+        <option *ngFor="let size of fontSizes" [value]="size">{{size}}</option>
+      </select>
+      <label for="fontFamily">Font Family:</label>
+      <select id="fontFamily" formControlName="fontFamily">
+        <option *ngFor="let family of fontFamilies" [value]="family">{{family}}</option>
+      </select>
+    </div>
+    <button type="submit">Save</button>
+    <button type="button" (click)="onDelete()">Delete</button>
+  </form>
+</div>

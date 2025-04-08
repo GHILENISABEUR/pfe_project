@@ -1,0 +1,167 @@
+<div class="nav-container">
+  <app-navbarprincipale *ngIf="!isUserMode"></app-navbarprincipale>
+  <br><br>
+  <div class="button-container">
+    <button class="button1" (click)="TS_AddText()" *ngIf="!isUserMode">Text</button>
+    <button class="button1" (click)="TS_AddTable()" *ngIf="!isUserMode">Table</button>
+    <button class="button1" (click)="TS_AddInputField()" *ngIf="!isUserMode">Input</button>
+    <button class="button1" (click)="triggerFileInputClick()" *ngIf="!isUserMode">Image</button>
+    <button class="button1" (click)="TS_AddButton()" *ngIf="!isUserMode">Button</button>
+    <button class="button1" (click)="TS_fromDB()" *ngIf="!isUserMode">add from DB </button>
+
+  </div>
+
+
+</div>
+<input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;">
+
+<div
+  class="text-container"
+  *ngFor="let text of texts"
+  cdkDrag
+  (cdkDragEnded)="onDragEnded($event, text)"
+  [cdkDragDisabled]="isUserMode"
+  [ngStyle]="{
+    'top': text.style['top'],
+    'left': text.style['left'],
+    'color': text.style['color'],
+    'background-color': text.style['backgroundColor'],
+    'font-size': text.style['fontSize'],
+    'font-family': text.style['fontFamily'],
+    'position': 'absolute'
+  }"
+  (click)="onTextClick(text)"
+>
+  <div class="text">{{ text.text }}</div>
+</div>
+
+<app-text-config
+  *ngIf="selectedText"
+  [text]="selectedText"
+  [isUserMode]="isUserMode"
+  (textUpdated)="onTextUpdated($event)"
+  (textDeleted)="onTextDeleted($event)"
+  (closeConfigtxt)="closeConfigTxt()"
+  cdkDrag
+></app-text-config>
+<br>
+
+
+
+<div class="container">
+  <div class="frame-container">
+
+      <div *ngFor="let table of TableService.tables">
+        <app-table [table]="table" [isUserMode]="isUserMode"></app-table>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="frame-container">
+
+      <ng-container *ngFor="let component of FromDBService.componentsFromDB">
+        <app-data-table *ngIf="component.type === 'data-table'" [fields]="component.data.fields" [selectedTable]="component.data.selectedTable"></app-data-table>
+        <app-visual-popup *ngIf="component.type === 'visual-popup'" [visual]="component.data.visual" [websiteId]="component.data.websiteId"></app-visual-popup>
+      </ng-container>
+      </div>
+    </div>
+
+<button class="fab" (click)="toggleMode()">
+  <i class="fa fa-eye"></i>
+</button>
+<div *ngIf="isUserMode">
+  <div >
+    <div *ngFor="let table of TableService.tables">
+      <app-table [table]="table" [isUserMode]="isUserMode"></app-table>
+    </div>
+
+  </div>
+</div>
+<div class="config-container" cdkDrag *ngIf="TableService.selectedTable">
+  <app-table-config ></app-table-config>
+</div>
+<div
+  class="input-field-container"
+  *ngFor="let inputField of inputFields"
+  cdkDrag
+  (cdkDragEnded)="onDragEnded($event, inputField)"
+  [cdkDragDisabled]="isUserMode"
+  [ngStyle]="{
+    'top': inputField.style['top'],
+    'left': inputField.style['left'],
+    'position': 'absolute'
+  }"
+  (click)="onInputFieldClick(inputField)"
+>
+  <input type="text" [value]="inputField.label" [ngStyle]="inputField.style" [readonly]="!isUserMode">
+</div>
+
+
+  <div class="config-container" cdkDrag *ngIf="selectedInputField">
+    <app-input-config
+      *ngFor="let inputField of inputFields"
+      [inputField]="inputField"
+      [isUserMode]="isUserMode"
+      (closeConfig)="closeConfigInp()"
+      (inputFieldDeleted)="onInputFieldDeleted($event)">
+    </app-input-config>
+  </div>
+  <div
+  class="image-container"
+  *ngFor="let image of images"
+  cdkDrag
+  [cdkDragDisabled]="isUserMode"
+  (cdkDragEnded)="onDragEnded($event, image)"
+  [ngStyle]="{
+    'top': image.style['top'],
+    'left': image.style['left'],
+    'position': 'absolute'
+  }"
+  (click)="onImageClick(image)"
+>
+  <img [src]="image.src" [ngStyle]="image.style" />
+</div>
+<app-image-config
+  *ngIf="selectedImage"
+  [image]="selectedImage"
+  [isUserMode]="isUserMode"
+  (imageUpdated)="onImageUpdated($event)"
+  (imageDeleted)="onImageDeleted($event)"
+  (closeConfigimg)="closeConfigImg()"
+  cdkDrag
+  class="config-draggable"
+></app-image-config>
+<div
+  class="button-container"
+  *ngFor="let button of buttons"
+  cdkDrag
+  (cdkDragEnded)="onDragEnded($event, button)"
+  [cdkDragDisabled]="isUserMode"
+  [ngStyle]="{
+    'top': button.style['top'],
+    'left': button.style['left'],
+    'width': button.style['width'],
+    'height': button.style['height'],
+    'color': button.style['color'],
+    'background-color': button.style['backgroundColor'],
+    'display': button.style['display'],
+    'justify-content': button.style['justifyContent'],
+    'align-items': button.style['alignItems'],
+    'border-radius': button.style['borderradius'],
+    'position': 'absolute'
+  }"
+  (click)="onButtonClick(button)"
+>
+  <div class="button">{{ button.value }}</div>
+</div>
+<app-button-config
+  *ngIf="selectedButton"
+  [button]="selectedButton"
+  [isUserMode]="isUserMode"
+  (buttonUpdated)="onButtonUpdated($event)"
+  (buttonDeleted)="onButtonDeleted($event)"
+  (closeConfigbtn)="closeConfigBtn()"
+></app-button-config>
+<div class="sidebar" cdkDrag>
+  <app-sidebar></app-sidebar>
+  </div>

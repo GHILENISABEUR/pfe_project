@@ -1,0 +1,27 @@
+<div class="flex-container">
+    <div *ngIf="TS_objectKeys(this.selectedFieldsByTableId).length>=2  else SelectEnough" class="container">
+      <!-- Join and display data -->    
+        
+        <table *ngIf="joinedData.length && commonKeys.length!=0">
+          <thead >
+            <tr class="fields-row">
+              <th *ngFor="let key of selectedFields" class="field-name">{{ key }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of joinedData" class="data-row">
+              <td *ngFor="let key of selectedFields" class="data-detail" >{{ row[key.toLowerCase()]}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="commonKeys.length==0">
+          <h5 class="rectangle">No common keys found</h5>
+        </div>
+    </div>
+    <ng-template #SelectEnough>
+      <div class="container">
+        <h5 class="rectangle">Please Select 2 tables to join</h5>
+      </div>
+    </ng-template>
+    </div>
+    

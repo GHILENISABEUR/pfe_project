@@ -1,0 +1,43 @@
+<div class="container">
+  <p *ngIf="visuals.length == 0; else displayVisuals">
+    No Visuals Found 
+  </p>
+  <div  class="elm">
+    <button class="add-btn" (click)="showCreateVisualForm = true">
+      <img src='assets/add (1).png' alt="add" class="add-icon">
+    </button>
+  </div>
+  <div *ngIf="showCreateVisualForm" class="create-visual-form">
+    <input class="add-input" [(ngModel)]="newVisualName" placeholder="Enter Visual Name">
+    <div class="btns">
+      <button class="add-btn" (click)="editingVisual ? TS_saveEditedVisual() : TS_createVisual(newVisualName)">
+        <img src='assets/check.png' alt="add" class="add-icon">
+      </button>
+      <button  class="add-btn" (click)="showCreateVisualForm = false">
+        <img src='assets/close.png' alt="add" class="add-icon">
+      </button>
+    </div>
+   
+    <p  class="warning" *ngIf="noData!=''"> {{ noData}}</p>
+  </div>
+
+
+  <ng-template #displayVisuals>
+    <!-- Display the visuals here -->
+    <div *ngFor="let visual of visuals">
+      <div class="rectangle">
+        {{ visual.name }}
+        <button class="view-btn" (click)="TS_openVisualPopup(visual)" >
+          <img  class="view-icon" src='assets\Eye_open_font_awesome_green.svg (1).png' alt="edit" class="view-icon">
+        </button>
+        <button class="edit-btn" (click)="TS_editVisual(visual)">
+          <img src='assets\pen.png' alt="edit" class="edit-icon">
+        </button>
+
+        <button class="delete-btn" (click)="TS_deleteVisual(visual)">
+          <img src='assets\delete.png' alt="delete" class="delete-icon">
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</div>

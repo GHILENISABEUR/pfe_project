@@ -1,0 +1,141 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  overflow: auto;
+  height:100vh;
+  display:flex;
+  flex-wrap: wrap;
+  width:100%;
+  padding:0;
+
+
+}
+
+.container {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.website-name {
+  cursor: pointer;
+
+  font-size: 24px;
+  font-weight: bold;
+  color: #002060;
+}
+
+.button-container {
+  position: sticky;
+  margin-left: 170px;
+  background-color: white;
+  display: flex;
+  gap: 10px;
+  margin-top:20px;
+  margin-bottom:20px;
+  width:100%;
+
+}
+.button-container1 {
+  position: fixed;
+  display: flex;
+  gap: 10px;
+}
+
+.button {
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-left: 100px;
+  height: 40px;
+  width: 200px;
+  background-color: #1854ce;
+
+}
+.navbar {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background-color: #002060;
+  height: 45px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+}
+
+.sidebar {
+  position: fixed;
+  background-color: #002060;
+  width: 45px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 25px;
+  box-sizing: border-box;
+  top: 105px;
+  left: 0;
+
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  margin-top: 70px;
+}
+
+.frame {
+  margin-left: 60px;
+  padding: 20px;
+  margin-top:10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  overflow: auto;
+  width:100%;
+  height:90vh;
+
+}
+
+ /* .button-container {
+  position:relative;
+  margin-left: 0px;
+  display: flex;
+  gap: 10px;
+}
+ .button-container .button {
+  background-color: #1854ce;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-left: 100px;
+  height: 40px;
+  width: 200px;
+} */
+
+.button2 {
+  background-color: #a1a3a7;
+  color: rgb(5, 5, 5);
+  left:0px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-left: -150px;
+  height: 40px;
+  width: 200px;
+}

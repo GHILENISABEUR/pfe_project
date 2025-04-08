@@ -1,0 +1,21 @@
+/* This will ensure the custom overlay container is on top of all elements */
+/* .custom-overlay-container {
+  z-index: 100000 !important; /* Extremely high z-index to override others */
+/* }
+
+.custom-overlay-container .cdk-overlay-backdrop {
+  z-index: 99999 !important;
+  background-color: rgba(0, 0, 0, 0.5); /* Optional backdrop color */
+/* }
+
+.custom-overlay-container .cdk-overlay-pane {
+  z-index: 100001 !important;
+} */
+
+/* .swal2-container {
+  z-index: 2000 !important;
+} */
+
+.dialog-z-index-3000 .mat-dialog-container {
+  z-index: 3000 !important;
+}

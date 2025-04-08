@@ -1,0 +1,24 @@
+<div class="home-app">
+
+    <div class="content">
+        <div class="header">
+            <div class="title">Websites</div>
+            <button (click)="TS_CreateNewApp()">create new website</button>
+        </div>
+        <div class="list">
+            <div class="item" *ngFor="let app of apps ">
+                <div class="tt">
+                    <div class="ttl">{{app.title}}</div>
+                    <div class="link"><a [href]="'http://localhost:4200/app-reader/'+app.id" target="_blank"> {{'http://localhost:4200/app-reader/'+app.id}} </a></div>
+                </div>
+                <div class="btns">
+                    <div class="btn" (click)="navigateToApp(app.id)">
+                        <i class="fa-regular fa-pen-to-square"></i></div>
+                    <div class="btn rd" (click)="TS_DeleteWebsite(app.id)"><i class="fa-regular fa-trash-can"></i></div>
+                    <button type="button" class="btn btn-primary" [routerLink]="'/GestionDB/'+app.id">add database </button>
+                </div>
+            </div>
+
+    </div>
+
+</div>

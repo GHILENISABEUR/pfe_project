@@ -1,0 +1,157 @@
+<div class="container">
+    <div class="row blocDataHeader">
+        <div class="col-4">Constat</div>
+        <div class="col-4">Decisions</div>
+        <div class="col-4">Actions</div>
+    </div>
+    <div class="row blocData">
+        <div class="col-4">
+            <div *ngFor="let report of reports; let index = index" (click)="selectReport(index)" 
+                 class="row item" [ngClass]="{'selected': report.selected}">
+                {{ report.report_Name }}
+            </div>
+            <div class="row" style="border: none;">
+                <span class="material-symbols-outlined addBtn" (click)="openReportForm()">
+                    add_circle
+                </span>
+            </div>
+        </div>
+        <div class="col-4">
+            <div *ngFor="let decision of decisions; let index = index" (click)="selectDecision(index)" 
+                 class="row item" [ngClass]="{'selected': decision.selected}">
+              {{ decision.Decision_Name }}
+            </div>
+            <div class="row" style="border: none;">
+              <span class="material-symbols-outlined addBtn" *ngIf="reportSelected" (click)="openDecisionForm()">
+                add_circle
+              </span>
+            </div>
+          </div>
+        
+          <div class="col-4">
+            <div *ngFor="let action of actions; let index = index" (click)="selectAction(index)" 
+                 class="row item" [ngClass]="{'selected': action.selected}">
+                {{ action.Action_Name }} <!-- Ensure the action title is displayed -->
+            </div>
+            <div class="row" style="border: none;">
+                <span class="material-symbols-outlined addBtn" *ngIf="decisionSelected" (click)="openActionForm()">
+                    add_circle
+                </span>
+            </div>
+        </div>
+        
+          
+    </div>
+
+    <div class="row" *ngIf="editModeIsOpen()" style="padding: 1%;">
+        <div class="row">
+            <h2>{{ messageOfAdding }}</h2>
+        </div>
+        <div class="row">
+            Title:
+            <input type="text" [(ngModel)]="titleSelected" (change)="updateContent('Name')">
+        </div>
+        <div class="row">
+            Description:
+            <textarea [(ngModel)]="descriptionSelected" cols="30" rows="10" (change)="updateContent('Content')"></textarea>
+        </div>
+        <div class="tableAction" *ngIf="actionSelected.Action_Id || messageOfAdding === messages.addAction">
+            <!-- Realisation Section -->
+            <div class="row">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Responsible Realisation</th>
+                            <th>Estimated Date</th>
+                            <th>Real Date</th>
+                            <th>Deliverable</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="text" [(ngModel)]="actionSelected.Responsible_Realisation_Name" 
+           (change)="updateActionContent('Responsible_Realisation')">
+                         
+                            </td>
+                            <td>
+                                <input [(ngModel)]="actionSelected.Date_Submission_Estimated" 
+                                       type="date" placeholder="yyyy-mm-dd" min="1999-01-31" 
+                                       max="2999-01-31" 
+                                       (change)="changeValueActionParm('Date_Submission_Estimated')">
+                            </td>
+                            <td>
+                                <input [(ngModel)]="actionSelected.Date_Submission_Real" 
+                                       type="date" placeholder="yyyy-mm-dd" min="1999-01-31" 
+                                       max="2999-01-31" 
+                                       (change)="changeValueActionParm('Date_Submission_Real')">
+                            </td>
+                            <td>
+                                <span (click)="openDocumentPopup('production')" class="material-symbols-outlined">
+                                    more_horiz
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Validation Section -->
+            <div class="row">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Responsible Validation</th>
+                            <th>Estimated Date</th>
+                            <th>Real Date</th>
+                            <th>Deliverable</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="text" [(ngModel)]="actionSelected.Responsible_Validation_Name" 
+                                (change)="updateActionContent('Responsible_Validation')">
+                            <td>
+                                <input [(ngModel)]="actionSelected.Date_Validation_Estimated" 
+                                       type="date" placeholder="yyyy-mm-dd" min="1999-01-31" 
+                                       max="2999-01-31" 
+                                       (change)="changeValueActionParm('Date_Validation_Estimated')">
+                            </td>
+                            <td>
+                                <input [(ngModel)]="actionSelected.Date_Validation_Real" 
+                                       type="date" placeholder="yyyy-mm-dd" min="1999-01-31" 
+                                       max="2999-01-31" 
+                                       (change)="changeValueActionParm('Date_Validation_Real')">
+                            </td>
+                            <td>
+                                <span (click)="openDocumentPopup('validation')" class="material-symbols-outlined">
+                                    more_horiz
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="row btnBloc">
+        <button class="deleteBtn" *ngIf="!newFormIsOpen" (click)="deleteCurrent()">
+            Delete Instance
+        </button>
+        <button class="addBtn" *ngIf="newFormIsOpen" (click)="createNewInstance()">
+            Add
+        </button>
+    </div>  
+
+
+</div>
+
+<app-documents *ngIf="documentPopupIsOpen" 
+[isValidation]="validationDocumentsIsOpen" 
+[action]="actionSelected" 
+[responsibleName]="responsibleNameForDocuments" 
+(close)="validateDocument()">
+</app-documents>

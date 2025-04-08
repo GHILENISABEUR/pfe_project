@@ -1,0 +1,776 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  overflow: auto;
+  height: 100vh;
+  width: 100%;
+  padding: 0;
+}
+
+.container {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.website-name {
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: bold;
+  color: #002060;
+}
+
+.back-button {
+  background-color: #002060;
+  color: white;
+  padding: 5px 10px;
+  font-size: 16px;
+  margin-top: 0px;
+  background-color: #1b96fa;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  height: 40px;
+  width: 150px;
+}
+
+.add-graph-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.button {
+  background-color: #002060;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-left: 30px;
+  height: 40px;
+  width: 200px;
+  font-size: larger;
+}
+
+.add-graph-button {
+  background-color: #1ba4faae;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 40px;
+  width: 130px;
+  font-size: 16px;
+}
+.add-graph-button:hover{
+  background-color: #1b96fa; /* Hover effect */
+
+}
+.content-wrapper {
+  display: flex;
+  width: 100%;
+  padding: 20px 0;
+  padding: 20px;
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 10px;
+  height: 100vh; /* Ensure the content wrapper takes full height */
+
+}
+
+.left-space, .right-space {
+  flex: 0 0 300px; /* Keep the width of the side spaces at 50px */
+}
+
+.cards-list {
+  flex: 1 1 auto; /* Adjust the flex value to allow it to expand */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px; /* Adds 10px gap between all items, both rows and columns */
+}
+
+
+
+
+.card {
+  position: relative;
+  width: auto; /* Default width */
+  /* height: 230px; Default height */
+  border-radius: 10px;
+  border: solid 1px #ddd;
+  cursor: pointer;
+  transition: 0.4s;
+  display: flex;
+  flex-direction: column;
+  height: auto; /* Permet d'ajuster en fonction du contenu */
+
+}
+
+.card-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  overflow: hidden;
+  padding: 0; /* Remove any padding inside the card body */
+  margin: 0; /* Remove any margin */
+  height: calc(100% - 40px); /* Ajuste la hauteur pour prendre en compte la hauteur de l'en-tête */
+
+}
+
+.graph-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.card-header {
+  background-color: #002060;
+  color: white;
+  padding: 10px;
+  display: flex;
+  height: 30px;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  background-color: #ffffff;
+  color: #fff;
+}
+
+.edit-button {
+  background-color: #1b96fa;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.title-white {
+  color: black;
+}
+
+.title-black {
+  color: black;
+}
+
+@media all and (max-width: 500px) {
+  .cards-list {
+    flex-direction: column;
+  }
+}
+
+.selected {
+  background-color: #003865;
+}
+
+.selected p {
+  color: aliceblue;
+}
+
+.notSelected {
+  background-color: white;
+}
+
+.notSelected p {
+  color: black;
+}
+
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(15px);
+}
+
+.testbox {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 5%;
+  right: 25%;
+  z-index: 100;
+  align-items: center;
+  overflow: hidden;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.tabsHeading {
+  background-color: #fff;
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
+}
+
+.closeTabs {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  z-index: 0;
+  cursor: pointer;
+}
+
+.closeTabs:hover {
+  color: #e83535;
+}
+
+.addCodeBlock {
+  margin: 5% auto;
+}
+
+.addDiv {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 3%;
+}
+
+.graph-windows {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.graph-window {
+  margin: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.fixed-width-tabs {
+  width: 53vw; /* Adjust the width as needed */
+  overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+.mat-tab-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 150px; /* Set a maximum width for the tabs */
+  overflow: hidden; /* Ensure overflow is hidden */
+  text-overflow: ellipsis; /* Ensure text-overflow is handled */
+  white-space: nowrap; /* Ensure white-space is handled */
+}
+
+.mat-tab-group {
+  overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+.tab-label-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.tab-title {
+  flex-grow: 1;
+  margin-right: 8px;
+
+}
+
+.edit-input {
+  flex-grow: 1;
+  margin-right: 8px;
+  font-size: 16px;
+  padding: 5px;
+}
+
+.edit-tab-button,
+.save-tab-button,
+.close-tab-button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #e83535;
+  margin-top: 7px;
+  padding-left: 20px;
+}
+
+.edit-tab-button:hover,
+.save-tab-button:hover,
+.close-tab-button:hover {
+  color: red;
+}
+
+.mat-icon {
+  font-size: 1.2em;
+}
+
+.button-container {
+  position: sticky;
+  margin-left: 10px;
+  background-color: white;
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  justify-content: center;
+}
+
+.button-container1 {
+  position: fixed;
+  display: flex;
+  gap: 10px;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgb(253, 162, 25);
+  margin-left: 10px;
+  margin-top: 13px;
+}
+.cards-list {
+  position: relative; /* Ensure the container is relative for absolute positioning of children */
+  flex: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  gap: 10px;
+}
+
+.graph-card {
+  position: relative;
+  cursor: move;
+  z-index: 1000; /* Ensure dragged element is on top */
+  transition: transform 0.01s ease-in-out; /* Smooth transition */
+  display: flex;
+  flex-direction: column;
+  margin: 0; /* Remove individual margins */
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.graph-card.cdk-drag-preview {
+  opacity: 0.8;
+}
+
+.graph-card.cdk-drag-placeholder {
+  visibility: hidden;
+}
+
+/* For WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1 !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #1b0094 !important;
+  border-radius: 10px !important;
+  border: 2px solid #f1f1f1 !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #00108d !important;
+}
+
+/* For Firefox */
+body, .cards-list, .fixed-width-tabs, .mat-tab-group {
+  scrollbar-width: thin !important;
+  scrollbar-color: #220066 #f1f1f1 !important;
+}
+
+.button-container {
+  width: 100%;
+
+  padding: 10px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+/* Input Group Styling */
+.input-group {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.form-control {
+  flex-grow: 1;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  border-radius: 5px 0 0 5px;
+  font-size: 16px;
+}
+
+.input-group-append {
+  display: flex;
+  align-items: center;
+  background-color: #f1f1f1;
+  padding-left: 5px; /* Add some padding to move save button slightly left */
+}
+
+.save-tab-button {
+  margin-left: -5px; /* Adjust the position to move it slightly left */
+  position: relative;
+}
+
+.cancel-tab-button {
+  position: relative;
+  top: 5px; /* Move the cancel button slightly lower */
+  margin-right: 5px;
+}
+
+.edit-tab-button,
+.close-tab-button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #e83535;
+}
+
+.edit-tab-button:hover,
+.save-tab-button:hover,
+.cancel-tab-button:hover,
+.close-tab-button:hover {
+  color: #e85c5c;
+}
+
+
+
+/**/
+
+.resizer {
+  width: 15px;
+  height: 15px;
+  background: #faa11b;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  cursor: se-resize;
+  z-index: 10;
+}
+
+.cancel-tab-button {
+  border: none;
+  color: #e83535;
+  background: transparent;
+}
+
+.add-graph-buttons {
+  display: flex;
+  justify-content: center; /* Center the buttons */
+  margin-top: 20px; /* Space between button containers */
+  gap: 20px; /* Space between buttons */
+}
+
+.data-button,
+.filters-button {
+  background-color: #1ba4faae; /* Match the color with other buttons */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 40px;
+  width: 100px;
+  font-size: 16px;
+}
+
+.data-button:hover,
+.filters-button:hover {
+  background-color: #1b96fa; /* Hover effect */
+}
+.unique-values-panel {
+  border: 1px solid #ddd; /* Softer border color */
+  background: #f9f9f9; /* Light background for better readability */
+  padding: 15px; /* Increased padding for a cleaner look */
+  position: absolute; /* Required for dragging */
+  z-index: 1000; /* Ensure it appears on top */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border-radius: 8px; /* Rounded corners for a modern look */
+  max-width: 400px; /* Maximum width to maintain design consistency */
+  max-height: 300px; /* Maximum height to prevent excessive resizing */
+  overflow: hidden; /* Prevent overflow issues */
+}
+.draggable {
+  position: absolute;
+  z-index: 1000; /* Ensure it appears on top of other elements */
+  /* Ensure the element can be dragged */
+
+}
+
+/* Resizable and Draggable Styles */
+.resizable {
+  resize: both;
+  overflow: auto; /* Handles overflow when resizing */
+  min-width: 200px; /* Minimum width for resizing */
+  min-height: 200px; /* Minimum height for resizing */
+}
+
+.draggable {
+  position: absolute; /* Ensure the element can be dragged */
+
+}
+.draggable-header {
+  background-color: #007bff;
+  color: rgb(151, 23, 177);
+  padding: 5px;
+  border-radius: 8px 8px 0 0;
+  align-items: center;
+  justify-content: space-between;
+  cursor: move;
+  display: flex;
+}
+
+.sort-button {
+  background-color: transparent; /* Remove background color */
+  border: none;
+  color: #007bff; /* Primary color for the button */
+  font-size: 18px; /* Slightly larger font size for better visibility */
+  cursor: pointer;
+  position: absolute; /* Position it absolutely within the panel */
+  top: 10px; /* Distance from the top */
+  right: 10px; /* Distance from the right */
+  transition: color 0.3s, transform 0.3s; /* Smooth transition for color and transform */
+  padding: 5px; /* Add padding for better click area */
+}
+
+/* Hover Effect */
+.sort-button:hover {
+  color: #0056b3; /* Darker color on hover */
+}
+
+/* Arrow Direction Styles */
+.sort-button::before {
+  content: '▲'; /* Default to ascending arrow */
+  display: inline-block;
+  transition: transform 0.3s; /* Smooth transition for arrow rotation */
+}
+
+/* Class for Descending Arrow */
+.sort-button.descending::before {
+  content: '▼'; /* Down arrow */
+  transform: rotate(180deg); /* Rotate arrow for descending */
+}
+.unique-values-body {
+  padding: 10px;
+  overflow-y: auto;
+
+}
+.unique-values-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.unique-values-list button {
+  display: block;
+  width: 100%;
+  margin-bottom: 5px;
+  background: linear-gradient(145deg, #333, #666);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  padding: 12px 20px;
+  text-align: left;
+  font-size: 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.unique-values-list button:hover {
+  background: linear-gradient(145deg, #666, #333);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+.unique-value-button.not-selected {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.unique-value-button.selected {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  opacity: 1;
+}
+.toilet-paper-container {
+  position: relative;
+  width: 400px;
+  height: 600px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Support métallique */
+.support {
+  position: absolute;
+  top: 10px;
+  width: 300px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bar {
+  width: 200px;
+  height: 10px;
+  background: silver;
+  border-radius: 5px;
+}
+
+.holder {
+  width: 20px;
+  height: 50px;
+  background: silver;
+  border-radius: 10px 10px 0 0;
+  position: relative;
+  top: -10px;
+}
+
+/* Rouleau */
+.roll {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, #ddd, #bbb);
+  border-radius: 50%;
+  position: relative;
+  margin-top: 70px;
+  transform-origin: center;
+  transition: transform 0.2s ease-out;
+}
+
+.hole {
+  width: 80px;
+  height: 80px;
+  background-color: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Papier déroulant */
+.paper {
+  width: 80px;
+  background-color: white;
+  border-left: dashed 2px #999;
+  position: absolute;
+  top: 170px;
+  left: 160px;
+  transform-origin: top center;
+  cursor: grab;
+  transition: height 0.2s ease-out, transform 0.2s ease-out;
+  background-size: cover;
+}
+.carousel-container {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  border: 2px solid lightgray;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.image-container {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  opacity: 0.5;
+  transition: all 0.5s ease;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.image-container.active {
+  width: 200px; /* Taille augmentée de l'image centrale */
+  height: 200px;
+  opacity: 1;
+  transform: translateY(-30px);
+  z-index: 3; /* Assurez-vous que l'image centrale est toujours au-dessus */
+}
+
+.image-container.left {
+  transform: translateX(-150px) scale(0.8);
+}
+
+.image-container.right {
+  transform: translateX(150px) scale(0.8);
+}
+
+.image-container:not(.active) {
+  z-index: 2; /* Les autres images restent derrière */
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 4;
+}
+
+.nav-button.left {
+  left: 10px;
+}
+
+.nav-button.right {
+  right: 10px;
+}

@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="causesContainer">
+    <!-- Display the causes (already selected graphs) above the button -->
+    <div *ngIf="causes.length > 0" class="selected-graphs">
+      <div *ngFor="let graph of causes; let i = index" class="OneCause" (dblclick)="openGraphTabAndNavigate(graph)">
+        <h3>{{ graph.File_Name }}</h3>
+        <span (click)="deleteCause(i)" class="material-symbols-outlined deleteIcon">delete</span>
+      </div>
+    </div>
+
+    <button (click)="openAvailableGraphs()">+ Add Graph</button>
+
+    <!-- Available Graphs List Dialog -->
+    <div *ngIf="showAvailableGraphs" class="dialog-overlay">
+      <div class="dialog-content">
+        <div *ngFor="let graph of availableGraphs" 
+             [ngClass]="{'selected': isSelected(graph)}"
+             class="graph-list-item" 
+             (click)="selectGraph(graph)">
+          {{ graph.File_Name }}
+        </div>
+        <button (click)="closeAvailableGraphs()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

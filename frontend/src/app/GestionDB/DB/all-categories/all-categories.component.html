@@ -1,0 +1,75 @@
+<!-- Niv 1 -->
+<div class="flex-container">
+    <div class="container" draggable="true" (dragstart)="TS_dragStart($event)" (dragend)="TS_dragEnd($event)">
+      <div *ngIf="categories.length; else noCategories">
+        <ul>
+          <li *ngFor="let category of categories" class="categ-name" (click)="TS_selectCategory(category)" [class.selected]="selectedCategory === category">
+            <div class="name-and-buttons">
+              <span class="categ-name-text">{{ category.name }}</span>
+              <div class="action-buttons" *ngIf="showGestionControls && category.name !== 'Non Classified'">
+                <button type="button" class="btn btn-danger btn-sm" (click)="TS_editCategory(category.id, category.name); $event.stopPropagation();">
+                  <img src="assets/pen.png" alt="Edit" draggable="false" style="width: 20px; height: 20px;">
+                </button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="TS_deleteCategory($event, category.id); $event.stopPropagation();">
+                  <img src="assets/delete.png" alt="Delete" draggable="false" style="width: 20px; height: 20px;">
+                </button>
+  
+              </div>
+            </div>
+          </li >
+          
+        </ul>
+      </div>
+      <ng-template #noCategories>
+        <p>No categories found.</p>
+      </ng-template>
+  
+      <div class="gestion-button" (click)="TS_handleGestion()">Gestion</div>
+  
+      <div class="toggle-button-container" *ngIf="showGestionControls && !isEditing">
+        <button type="button" class="btn btn-create" (click)="TS_toggleCreateForm()">
+          <img [src]="showCreateForm ? 'assets/delete (1).png' : 'assets/add (1).png'" alt="{{ showCreateForm ? 'Collapse' : 'Expand' }}" draggable="false">
+        </button>
+      </div>
+  
+      <form [formGroup]="categoryForm" *ngIf="showGestionControls && showCreateForm && !isEditing">
+        <div class="form-group">
+          <input type="text" formControlName="name" class="form-control" placeholder="Enter category name">
+          <div *ngIf="categoryForm.get('name')?.hasError('CategoryNameExists')" class="text-danger">
+            Category name already exists.
+          </div>
+          <select formControlName="parent" class="form-control">
+            <option [ngValue]="null">No Parent (Top Level)</option>
+            <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.name }}</option>
+          </select>
+          <button type="button" (click)="submitForm()" class="btn btn-primary" [disabled]="categoryForm.get('name')?.invalid">
+            <img src="assets/check.png" alt="Create" draggable="false" class="btn-icon">
+          </button>
+        </div>
+      </form>
+      
+      <form [formGroup]="categoryForm" *ngIf="isEditing">
+        <div class="form-group">
+          <input type="text" formControlName="name" class="form-control" placeholder="Enter category name">
+          <div *ngIf="categoryForm.get('name')?.hasError('CategoryNameExists')" class="text-danger">
+            Category name already exists.
+          </div>
+          <select formControlName="parent" class="form-control">
+            <option [ngValue]="null">No Parent (Top Level)</option>
+            <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.name }}</option>
+          </select>
+          <div class="btn-group">
+            <button type="button" (click)="submitForm()" class="btn btn-success" [disabled]="categoryForm.get('name')?.invalid">
+              <img src="assets/save.png" alt="Save" draggable="false" class="btn-icon">
+            </button>
+            <button type="button" (click)="TS_cancelEdit()" class="btn btn-danger">
+              <img src="assets/close.png" alt="Cancel" draggable="false" class="btn-icon">
+            </button>
+          </div>
+        </div>
+      </form>
+      
+    </div>
+    <app-all-tables *ngIf="showS6o4o3allTables" [selectedCategory]="selectedCategory"></app-all-tables>
+  </div>
+  

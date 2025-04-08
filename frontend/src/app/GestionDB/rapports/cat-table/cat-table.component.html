@@ -1,0 +1,40 @@
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-6 card-column" *ngFor="let card of cards">
+        <div class="card mb-4" (drop)="TS_onDrop($event, card)" (dragover)="TS_allowDrop($event)">
+          <div class="card-body">
+            <div class="card-title-container">
+              <h5 class="card-title">{{ card.title }}</h5>
+            </div>
+            <!--card categories-->
+            <ul *ngIf="card.selectable">
+              <li class="list-rectangle" *ngFor="let name of card.description" (click)="TS_onCategorySelect(name)">
+                {{ name }}
+              </li>
+            </ul>
+            <ul *ngIf="!card.selectable">
+              <!--card tables/selected-->
+              <ng-container *ngIf="card.title !== 'Rapports'; else notDraggable">
+                <li class="list-rectangle"
+                    *ngFor="let name of card.description"
+                    draggable="true"
+                    (dragstart)="TS_onDragStart($event, name)">
+                  {{ name}}
+                  <span *ngIf="card.title === 'Selected'" class="close-icon" (click)="TS_unselectTable(name, $event)">
+                    &#x274C;
+                  </span>
+                </li>
+              </ng-container>
+              <!--visuals -->
+              <ng-template #notDraggable>
+                <app-visuals ></app-visuals>
+              </ng-template>
+
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

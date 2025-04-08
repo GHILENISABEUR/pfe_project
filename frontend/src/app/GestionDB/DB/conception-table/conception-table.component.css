@@ -1,0 +1,267 @@
+/* General Container Styling */
+.container {
+  min-width: 400px;
+  max-width: 360px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #d9d9d9;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.container:hover {
+  transform: scale(1.02);
+}
+
+/* Close Button Styling */
+.close-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.close-button:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.1);
+}
+
+.close-button img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Rectangle Styling */
+.rectangle {
+  width: 220px;
+  height: 45px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  color: #333;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Field Row Styling */
+.field-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 12px;
+  background-color: #fafafa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.field-row:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.01);
+}
+
+/* Field and Type Columns */
+.fields-column, .types-column {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+}
+
+.fields-column {
+  justify-content: flex-start;
+}
+
+.types-column {
+  justify-content: center;
+}
+
+/* Rectangle Detail Styling */
+.rectangle-detail {
+  width: 100%;
+  height: 32px;
+  background-color: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  color: #555;
+  padding: 0 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: border-color 0.2s ease;
+}
+
+.rectangle-detail:focus {
+  border-color: #012142;
+}
+
+/* Action Buttons Styling */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.edit-btn, .delete-btn {
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+  background-color: #e6e6e6;
+  transform: scale(1.1);
+}
+
+.editing-image, .delete-image {
+  width: 18px;
+  height: 18px;
+}
+
+/* Form Styling */
+.field-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.input-field, .input-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-field:focus, .input-select:focus {
+  border-color: #012142;
+  box-shadow: 0 0 5px rgba(1, 33, 66, 0.2);
+}
+
+.checkbox {
+  margin-right: 6px;
+}
+
+/* Error Message Styling */
+#error {
+  color: #ff4d4d;
+  font-size: 12px;
+  margin-top: 6px;
+  text-align: center;
+}
+
+/* Button Styling */
+.bottom-button {
+  font-size: 13px;
+  padding: 9px 18px;
+  margin: 6px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.bottom-button:hover, .active-button {
+  background-color: #012142;
+  color: #ffffff;
+  border-color: #012142;
+  transform: scale(1.05);
+}
+
+/* Details Toggle Styling */
+.details-toggle {
+  display: inline-block;
+  background-color: #012142;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.details-toggle:hover {
+  background-color: #014173;
+  transform: scale(1.05);
+}
+
+/* Additional Details Styling */
+.additional-details {
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* Data Buttons */
+.data-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 12px;
+}
+
+/* Flex Container Styling */
+.flex-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+  .container {
+    min-width: 92%;
+    max-width: 92%;
+    padding: 16px;
+  }
+
+  .rectangle {
+    width: 90%;
+    font-size: 13px;
+  }
+
+  .rectangle-detail {
+    font-size: 12px;
+  }
+
+  .details-toggle {
+    width: 100%;
+  }
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10px; /* Adjust as needed */
+}

@@ -1,0 +1,92 @@
+.row {
+    margin-right: -10px; /* Adjusted to compensate extra padding on the last card */
+    margin-left: -10px; /* Adjusted to compensate extra padding on the first card */
+  }
+  
+  /* Each card column with specific padding to ensure 20px between cards */
+  .card-column {
+    padding: 10px; /* 10px on each side resulting in 20px total spacing between cards */
+    flex: 0 0 50%; /* Ensures that only two cards fit within each row regardless of the container size */
+    max-width: 50%; /* Ensures that each card column does not exceed half the row's width */
+    display: flex;
+    max-height: 500px;/* Keeps the card centered in the column */
+  }
+  
+  /* Styling for the entire card */
+  .card {
+    width: 400px; /* Fixed width for the cards */
+    background-color: rgb(234, 242, 242); /* Custom background color */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    height: 250px;
+    display: flex; /* Center content vertically */
+    flex-direction: column; /* Align content vertically */
+  }
+  
+  /* Styling for the title's container */
+  .card-title-container {
+    background-color: white; /* White background for the title container */
+    text-align: center; /* Center-align the text */
+    margin-bottom: 10px; /* Margin for spacing around the container */
+    padding: 5px 0;
+    height: 30px; /* Padding for spacing inside the container */
+  }
+  
+  /* Enhanced styles for the card title */
+  .card-title {
+    font-size: 1em; /* Larger font size */
+    font-weight: bold; /* Bold font */
+    text-transform: uppercase; /* Uppercase text */
+  }
+  
+  /* Additional card body styling */
+  .card-body {
+    padding: 15px; /* Padding inside the card */
+    overflow-y: auto;
+  }
+  .list-rectangle {
+    background-color: #fff; /* White background for contrast */
+    border: 1px solid #ccc; /* Light grey border */
+    padding: 5px; /* Adjusted padding inside the rectangle */
+    margin-bottom: 5px; /* Space between rectangles */
+    text-align: center; /* Center text within the rectangle */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    cursor: pointer; /* Cursor pointer on hover */
+    height: 30px; /* Adjusted height */
+    display: flex; /* Center content vertically */
+    align-items: center; /* Center content vertically */
+    justify-content: center;
+    width: 155px;
+    margin-left: -30px;
+  
+  }
+  
+  
+  
+  .list-rectangle:hover {
+    background-color: #f0f0f0; /* Light background color on hover */
+  }
+  
+  .drop-zone {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    background-color: #f8f9fa;
+    margin-top: 10px;
+  }
+  .close-icon {
+    cursor: pointer;
+    padding-left: 10px;
+    color: red;
+  }
+  .add-icon {
+    cursor: pointer;
+    padding-left: 10px;
+    color: green;
+    height:15px;
+  }
+  .add-btn{
+    border:none;
+  }
+  p{
+    font-size:15px;
+  }

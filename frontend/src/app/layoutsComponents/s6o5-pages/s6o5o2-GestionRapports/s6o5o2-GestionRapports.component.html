@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+   <title>CleverFlow Website</title>
+</head>
+<body>
+
+
+  <div class="button-container">
+    <button class="button2" routerLink="/websites">return</button>
+    <button class="button" [routerLink]="'/GestionDB/'+websiteId">Gestion DB</button>
+    <button class="button" [routerLink]="'/making-app/'+websiteId">Gestion UI</button>
+    <button class="button" routerLink="/GestionBI">Gestion BI</button>
+  </div>
+
+  <app-s6o9-sidebar></app-s6o9-sidebar>
+
+
+<div class="frame" (dragover)="TS_OnDragOver($event)" (drop)="TS_OnDrop($event)">
+  <ng-template #frameContainer></ng-template>
+
+<app-rapport-tables></app-rapport-tables>
+</div>
+</body>
+</html>

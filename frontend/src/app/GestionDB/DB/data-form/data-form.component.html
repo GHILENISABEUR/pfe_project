@@ -1,0 +1,130 @@
+<!-- Niv 5 data form  -->
+
+<div class="flex-container">
+  <div class="container">
+    <div class="rectangle">{{ selectedTable?.name }}</div>
+
+    <!-- Conditional rendering of table wrapper or add row form -->
+    <div *ngIf="!showAddForm" class="table-wrapper">
+      <!-- Fields Column -->
+      <div class="fields-column">
+        <div *ngFor="let field of TS_getDisplayedFields()" class="rectangle-detail">
+          {{ field.name }}
+        </div>
+      </div>
+
+      <!-- Data Column -->
+      <div class="data-column">
+        <div *ngFor="let dataSet of TS_currentDataSets(); let i = index" class="data-row">
+          <div *ngFor="let field of fields" class="rectangle-detail">
+            <span *ngIf="dataSet.id !== currentEditId; else editData">
+              {{ dataSet.details[field.name] }}
+            </span>
+            <ng-template #editData>
+              <input class="edit-input" type="text" placeholder="{{ getPlaceholder(field) }}" [formControlName]="field.name">
+            </ng-template>
+          </div>
+          <!-- Edit and Delete Buttons for the row -->
+          <div class="action-buttons">
+            <button *ngIf="dataSet.id !== currentEditId" class="edit-btn" (click)="TS_editRow(dataSet)">
+              <img src="assets/pen.png" alt="Edit" class="edit-icon">
+            </button>
+            <button *ngIf="dataSet.id === currentEditId" class="submit-edit-btn" (click)="TS_onSubmitEdit()">
+              <img src="assets/save.png" alt="Save" draggable="false" class="btn-icon">
+            </button>
+            <button *ngIf="dataSet.id === currentEditId" class="cancel-edit-btn" (click)="currentEditId = null">
+              <img src="assets/close.png" alt="Cancel" draggable="false" class="btn-icon">
+            </button>
+            <button class="delete-btn" (click)="TS_deleteRow(dataSet.id)">
+              <img src="assets/delete.png" alt="Delete" class="delete-icon">
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Row Form -->
+    <div *ngIf="showAddForm" class="table-wrapper">
+      <form class="add-form" [formGroup]="dataForm" (ngSubmit)="TS_onSubmitAdd()">
+        <div>
+          <div *ngFor="let field of fields" class="input-element">
+
+            <ng-container *ngIf="field.field_type === 'LIST'; else normalInput">
+              <label class="rectangle-detail">{{ field.name }}</label>
+              <select [formControlName]="field.name" class="rectangle-detail">
+                <option *ngFor="let option of field.list_values" [value]="option">{{ option }}</option>
+              </select>
+            </ng-container>
+
+            <ng-template #normalInput>
+              <label class="rectangle-detail">{{ field.name }}</label>
+              <ng-container *ngIf="field.field_type !== 'LIST'">
+
+                <input *ngIf="field.field_type === 'TEXT'"
+                       [formControlName]="field.name"
+                       type="text"
+                       class="input-style rectangle-detail"
+                       [placeholder]="getPlaceholder(field)" />
+
+                <input *ngIf="field.field_type === 'INTEGER'"
+                       [formControlName]="field.name"
+                       type="number"
+                       class="input-style rectangle-detail"
+                       [placeholder]="getPlaceholder(field)" />
+
+                <input *ngIf="field.field_type === 'DATE'"
+                       [formControlName]="field.name"
+                       type="date"
+                       class="input-style rectangle-detail"
+                       [placeholder]="getPlaceholder(field)" />
+
+                <input *ngIf="field.field_type === 'BOOLEAN'"
+                       [formControlName]="field.name"
+                       type="checkbox"
+                       class="input-style rectangle-detail"
+                       [placeholder]="getPlaceholder(field)" />
+
+                <input *ngIf="field.field_type === 'DECIMAL'"
+                       [formControlName]="field.name"
+                       type="number"
+                       step="any"
+                       class="input-style rectangle-detail"
+                       [placeholder]="getPlaceholder(field)" />
+              </ng-container>
+            </ng-template>
+
+          </div>
+        </div>
+        <div class="action-buttons-add">
+          <button type="submit" [disabled]="!dataForm.valid">Submit</button>
+          <button type="button" (click)="TS_toggleAddForm()">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Add Form Button -->
+    <div>
+      <button class="add-btn" *ngIf="!showAddForm" (click)="TS_toggleAddForm()">Add Row</button>
+    </div>
+
+    <!-- Pagination Arrows -->
+    <div class="arrows">
+      <div *ngIf="currentPage > 1; else disabledLeftArrow" (click)="TS_previousPage()" class="arrow">
+        <i class='fa fa-arrow-left' style='font-size:10px'></i>
+      </div>
+      <ng-template #disabledLeftArrow>
+        <div class="arrow disabled">
+          <i class='fa fa-arrow-left' style='font-size:10px'></i>
+        </div>
+      </ng-template>
+      <div *ngIf="currentPage < totalPages; else disabledRightArrow" (click)="TS_nextPage()" class="arrow">
+        <i class='fa fa-arrow-right' style='font-size:10px'></i>
+      </div>
+      <ng-template #disabledRightArrow>
+        <div class="arrow disabled">
+          <i class='fa fa-arrow-right' style='font-size:10px'></i>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

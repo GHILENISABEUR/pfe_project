@@ -1,0 +1,66 @@
+
+.add-icon ,  .view-icon,.delete-icon , .edit-icon{
+    cursor: pointer;
+    padding-left: 10px;
+    color: green;
+    height:15px;
+
+    
+  }
+  .view-btn , .delete-btn , .edit-btn{
+    border:none;
+    background-color: #fff;
+    cursor: pointer;
+
+  }
+  .btns{
+    display: flex;
+    gap:10px;
+    margin-left:10px;
+  }
+  .warning{
+    display: block;
+    width:100%;
+    font-size:14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .elm{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width:150px;
+    margin-left:-30px;
+  }
+  .container{
+    margin-left:-20px;
+  }
+  .add-input{
+    margin-left:-25px;
+    width:150px;
+  }
+  .add-btn {
+    border:none;
+    margin-bottom:8px;
+  }
+  p{
+    font-size:15px;
+  }
+  .rectangle{
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 155px;
+    margin-left: -30px;
+  }

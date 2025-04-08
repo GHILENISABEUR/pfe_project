@@ -1,0 +1,101 @@
+/* General container styling */
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+/* Table header styling */
+.rectangle {
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 12px;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Field container styling */
+.field-container {
+  margin-bottom: 20px;
+}
+
+.field-name {
+  background-color: #6c757d;
+  margin-bottom: 5px;
+}
+
+/* Data container styling */
+.data-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.data-item {
+  background-color: #e9ecef;
+  color: #495057;
+  padding: 10px;
+  border-radius: 4px;
+  flex: 1 1 calc(33.333% - 20px); /* Adjust based on your layout */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Pagination button styling */
+button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .data-item {
+    flex: 1 1 calc(50% - 20px); /* Adjust for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .data-item {
+    flex: 1 1 100%; /* Full width on very small screens */
+  }
+
+  .rectangle {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}

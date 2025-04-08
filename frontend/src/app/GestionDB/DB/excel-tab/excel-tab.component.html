@@ -1,0 +1,39 @@
+<!-- Niv 6 Excel-->
+<div class="container">
+  <div class="btns">
+    <button class="map-btn" (click)="TS_toggleShowMapForm()">Import Excel Data</button>
+    <button class="map-btn" (click)="TS_toggleShowCreateForm()">Create From Excel</button>
+  </div>
+    <input class="input-file" type="file" (change)="TS_onFileChange($event)" />
+    <div *ngIf="sheetNames.length" class="sheet-selector">
+      <label for="sheet">Select Sheet:</label>
+      <select id="sheet" class="rectangle-detail" [(ngModel)]="selectedSheet" (change)="TS_loadSheetData(selectedSheet)">
+        <option *ngFor="let sheetName of sheetNames" [value]="sheetName">{{ sheetName }}</option>
+      </select>
+    </div>
+    <div *ngIf="showMapForm">
+      <div *ngIf="fields.length && headers.length" class="">
+        <div *ngFor="let field of fields" class="row">
+          <label class="rectangle-detail">{{ field.name }}</label>
+          <select [(ngModel)]="mappedFields[field.name]" class="rectangle-detail">
+            <option *ngFor="let header of headers" [value]="header">{{ header }}</option>
+            <option value="">Ignore</option>
+          </select>
+        </div>
+      </div>
+      <button class="map-btn" (click)="TS_mapFields()" [disabled]="!data.length">Map Fields</button>
+      <p>{{ successMessage }}</p>
+  </div>
+
+  <div *ngIf="showCreateForm">
+    <div *ngFor="let header of headers" class="row-import">
+      <label class="rectangle-detail">{{ header }}</label>
+      <input type="checkbox" [(ngModel)]="selectedFields[header]" />
+      <select [(ngModel)]="fieldTypes[header]" class="rectangle-detail">
+        <option *ngFor="let type of availableTypes" [value]="type">{{ type }}</option>
+      </select>
+    </div>
+    <button class="map-btn" (click)="TS_createSelectedFieldsAndAddData()">Create Selected Fields and Add Data</button>
+    <p>{{ successMessage }}</p>
+  </div>
+</div>

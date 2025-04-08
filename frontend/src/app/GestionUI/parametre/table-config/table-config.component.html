@@ -1,0 +1,100 @@
+<div class="config-panel">
+  <div class="table-controls" >
+    <button mat-raised-button  color="primary"  (click)="showStyleConfig()"><mat-icon>brush</mat-icon>Appliquer Style</button>
+    <button mat-raised-button color="accent"  (click)="showFunctionalityConfig()"><mat-icon>grid_on</mat-icon>Structurer Tableau</button>
+  </div>
+  <!-- Style Configuration -->
+  <div  class="config-section" *ngIf="tableService.selectedTable?.isStyleConfig">
+    <h3>Configuration du Style</h3>
+    <div class="config-item">
+      <button mat-stroked-button color="red" class="custom-background-button" (click)="openTableColorPicker()"><mat-icon>palette</mat-icon>Changer fond du tableau</button>
+      <input type="color" [(ngModel)]="tableBackgroundColor" (change)="changeTableBackground($event)" hidden #tableColorPicker>
+    </div>
+    <div class="config-item">
+      <button mat-stroked-button color="red" class="custom-background-button" (click)="openCellColorPicker()"><mat-icon>palette</mat-icon>Changer fond des cellules</button>
+      <input type="color" [(ngModel)]="cellBackgroundColor" (change)="changeCellBackground($event)" hidden #cellColorPicker>
+    </div>
+    <div class="config-item">
+      <button mat-stroked-button color="red" class="custom-background-button"(click)="openTextColorPicker()"><mat-icon>format_color_text</mat-icon> Changer couleur du texte</button>
+      <input type="color" [(ngModel)]="textColor" (change)="changeTextColor($event)" hidden #textColorPicker>
+    </div>
+    <div class="config-item">
+      <button mat-stroked-button  color="red" class="custom-background-button" (click)="addTableBorder()">
+        <mat-icon>border_all</mat-icon> Ajouter Bordure du Tableau
+      </button></div>
+      <div class="config-item">
+      <button mat-stroked-button color="red" class="custom-background-button" (click)="removeTableBorder()">
+        <mat-icon>border_clear</mat-icon> Supprimer Bordure du Tableau
+      </button>
+    </div>
+    <div class="config-item">
+      <button mat-stroked-button color="red" class="custom-background-button" (click)="addCellBorder()">
+        <mat-icon>border_outer</mat-icon> Ajouter Bordure des Cellules
+      </button></div>
+      <div class="config-item">
+
+      <button mat-stroked-button color="red" class="custom-background-button" (click)="removeCellBorder()">
+        <mat-icon>border_inner</mat-icon> Supprimer Bordure des Cellules
+      </button>
+    </div>
+    <div >
+      <mat-form-field appearance="outline" class="custom-form-field">
+        <mat-label>Police</mat-label>
+        <mat-select [(value)]="selectedFont" (selectionChange)="changeCellFont($event.value)">
+          <mat-option *ngFor="let font of availableFonts" [value]="font">{{ font }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+  </div>
+
+  <!-- Functionality Configuration -->
+  <div *ngIf="tableService.selectedTable?.isFunctionalityConfig" class="config-section">
+    <h3>Configuration des Fonctionnalités</h3>
+    <div *ngIf="tableService.selectedTable?.toggle as toggle" class="config-section">
+
+    <div class="config-item">
+      <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="toggle.showAddRowButton" (change)="toggleButton('addRow')"><span class="config-itemm"> ajouter ligne</span> </mat-slide-toggle>
+    </div>
+    <div class="config-item">
+      <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="toggle.showAddColumnButton" (change)="toggleButton('addColumn')"   [disabled]="tableService.selectedTable?.disableld!"        > <span class="config-itemm">Ajouter colonne</span></mat-slide-toggle>
+    </div>
+    <div class="config-item">
+      <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="toggle.showPaginationToggle" (change)="toggleButton('pagination')"><span class="config-itemm">Ajouter pagination</span></mat-slide-toggle>
+    </div>
+    <div class="config-item">
+      <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="toggle.showFilteringToggle" (change)="toggleButton('filtering')"><span class="config-itemm">Ajouter filtre</span></mat-slide-toggle>
+    </div>
+    <div class="config-item">
+      <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="toggle.showImportExcel" (change)="toggleButton('importExcel')" [disabled]="tableService.selectedTable?.disableld!"><span class="config-itemm">Importer Excel</span></mat-slide-toggle>
+    </div>
+    <div class="config-item">
+      <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="toggle.showExportExcel" (change)="toggleButton('exportExcel')"><span class="config-itemm">Exporter Excel</span></mat-slide-toggle>
+    </div>
+    <div class="config-item">
+      <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="toggle.showSelect" (change)="toggleButton('select')" [disabled]="tableService.selectedTable?.disableld!"><span class="config-itemm" >importer visual</span></mat-slide-toggle>
+    </div>
+    <div class="config-item">
+      <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="toggle.isColumnDragEnabled" (change)="toggleButton('colDrag')" [disabled]="tableService.selectedTable?.disableld!"><span class="config-itemm">Drag & Drop Colonnes</span></mat-slide-toggle>
+    </div>
+    <div class="config-item">
+      <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="toggle.isRowDragEnabled" (change)="toggleButton('rowDrag')"><span class="config-itemm">Drag & Drop Lignes</span></mat-slide-toggle>
+    </div>
+    <div class="config-item">
+      <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="toggle.isDragEnabled" (change)="toggleButton('tabDrag')"><span class="config-itemm">Drag & Drop tables</span></mat-slide-toggle>
+    </div>
+    <div class="config-item">
+      <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="toggle.EditerEnable" (change)="toggleButton('editer')"><span class="config-itemm">Editer cellules</span></mat-slide-toggle>
+    </div>
+    <div class="config-item">
+      <mat-slide-toggle class="custom-slide-toggle" [(ngModel)]="toggle.showCategories" (change)="toggleButton('showCategories')"><span class="config-itemm">show Categories</span></mat-slide-toggle>
+    </div>
+  </div>
+
+
+  </div><span class="fixed-bottom-buttons">
+  <button mat-raised-button color="warn" class="fixed-bottom-buttons" (click)="removeTable()" matTooltip="supprimer le tableau" class="delete-button">
+    <mat-icon>delete</mat-icon>Supprimer tableau
+  </button></span>
+</div>

@@ -1,0 +1,14 @@
+<h2>Select Table</h2>
+<form class="form">
+  <div class="form-group">
+    <label for="selectedTable">Select Table</label>
+    <select id="selectedTable" class="form-control" [(ngModel)]="selectedTable" name="selectedTable">
+      <option *ngFor="let table of tables" [value]="table">{{ table }}</option>
+    </select>
+  </div>
+
+  <div class="btns">
+    <button type="submit" class="btn btn-primary" (click)="TS_selectTable()">Fetch Values</button>
+    <button type="button" class="btn btn-secondary" (click)="TS_closeDialog()">Cancel</button>
+  </div>
+</form>

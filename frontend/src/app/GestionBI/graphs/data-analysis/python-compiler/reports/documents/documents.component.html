@@ -1,0 +1,43 @@
+
+
+
+<div class="bg">
+
+    <div class="container testbox">
+        <div class="display-doc">
+
+            <div class="row">
+                
+                <h4>Documents</h4>
+            </div>
+            <div class="row">
+                <div *ngFor="let document of documents" class="container-doc">
+
+                    <a class="document-div" href="{{getURlDocument(document)}}" target="_blank" >
+                        {{document.Document_Name}}
+                        
+                    </a>
+                    <span (click)="deleteDocument(document)" class="material-symbols-outlined deleteGroupIcon">
+                    delete
+                </span>
+                
+            </div>
+        </div>
+        
+        
+        
+<div class="row">
+    <input type="file" (change)="onFileSelected($event)">
+    <button (click)="onUpload()">Upload</button>
+    
+</div>
+
+<div class="row">
+    <button (click)="validate()">
+        validate
+    </button>
+</div>
+</div>
+
+</div>
+</div>

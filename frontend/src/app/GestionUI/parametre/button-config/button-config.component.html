@@ -1,0 +1,33 @@
+<div class="button-config-container" *ngIf="button" cdkDrag>
+    <button class="close-button" (click)="closeConfigContainer()">X</button>
+    
+    <label>
+      Value:
+      <select [(ngModel)]="button.value" (ngModelChange)="updateButtonStyle()">
+        <option *ngFor="let value of buttonValues | keyvalue" [value]="value.value">{{ value.value }}</option>
+      </select>
+    </label>
+    
+    <label>
+      Width:
+      <input type="text" [(ngModel)]="button.style['width']" (ngModelChange)="updateButtonStyle()">
+    </label>
+    
+    <label>
+      Height:
+      <input type="text" [(ngModel)]="button.style['height']" (ngModelChange)="updateButtonStyle()">
+    </label>
+  
+    <label>
+      Text Color:
+      <input type="color" [(ngModel)]="button.style['color']" (ngModelChange)="updateButtonStyle()">
+    </label>
+  
+    <label>
+      Background Color:
+      <input type="color" [(ngModel)]="button.style['backgroundColor']" (ngModelChange)="updateButtonStyle()">
+    </label>
+    
+    <button (click)="deleteButton()">Delete Button</button>
+  </div>
+  
