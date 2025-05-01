@@ -1201,3 +1201,68 @@ def delete_document(request, id):
             return JsonResponse({'error': 'Document not found'}, status=404)
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=405)
+    
+
+
+
+
+# api/views.py
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import google.generativeai as genai
+import os
+import json
+
+# Configure Gemini (same as your existing code)
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', 'your-api-key-here')
+genai.configure(
+    api_key=GEMINI_API_KEY,
+    transport='rest',
+    client_options={"api_endpoint": "generativelanguage.googleapis.com"}
+)
+
+PREFERRED_MODELS = [
+    'models/gemini-1.5-pro-latest',
+    'models/gemini-1.0-pro-vision-latest',
+    'models/gemini-1.5-flash-latest',
+    'models/gemini-pro-vision'
+]
+
+def get_model():
+    try:
+        models = list(genai.list_models())
+        for model_name in PREFERRED_MODELS:
+            if any(m.name == model_name for m in models):
+                return genai.GenerativeModel(model_name)
+        return None
+    except Exception as e:
+        print(f"Model Error: {str(e)}")
+        return None
+
+@csrf_exempt  # For simplicity (use proper auth in production)
+def generate_code(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            prompt = data.get('prompt', '')
+            language = data.get('language', 'python')
+            
+            model = get_model()
+            if not model:
+                return JsonResponse({'error': 'No available models'}, status=500)
+            
+            full_prompt = f"""Generate {language} code that:
+1. Implements: {prompt}
+2. Uses proper error handling
+3. Includes necessary comments
+4. Follows best practices
+5. Has proper indentation
+
+Return ONLY the code without any explanations or markdown formatting."""
+            
+            response = model.generate_content(full_prompt)
+            return JsonResponse({'code': response.text})
+        
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    return JsonResponse({'error': 'Only POST requests are allowed'}, status=405)

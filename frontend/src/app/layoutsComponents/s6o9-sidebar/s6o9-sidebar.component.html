@@ -1,13 +1,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
 <div [@openClose]="isOpen ? 'open' : 'closed'" class="sidebar">
   <button (click)="TS_ToggleSidebar()" class="toggle-button">
     <i class="fa" [class]="isOpen ? 'fa-angle-left' : 'fa-angle-right'"></i>
   </button>
+
   <!-- Website name toggling -->
   <div class="website-name">
     <span *ngIf="isOpen" routerLink="/">CleverFlow</span>
     <span *ngIf="!isOpen" routerLink="/">CF</span>
   </div>
+
   <ul>
     <!-- gestion database -->
     <li *ngIf="isOpen" (mouseenter)="hover=true" (mouseleave)="hover=false" [ngClass]="{'hover': hover}" [routerLink]="'/GestionDB/'+websiteId">
@@ -17,22 +20,36 @@
       <i class="fa fa-database icon"></i>
       <span class="icon-label">Database</span>
     </li>
+
     <!-- gestion rapports -->
     <li *ngIf="isOpen" (mouseenter)="hover=true" (mouseleave)="hover=false" [ngClass]="{'hover': hover}" [routerLink]="['/GestionRapports', websiteId]">
       <i class="fa fa-file-text icon"></i> Gestion Rapports
     </li>
-    <li *ngIf="!isOpen"  [routerLink]="['/GestionRapports', websiteId]">
+    <li *ngIf="!isOpen" [routerLink]="['/GestionRapports', websiteId]">
       <i class="fa fa-file-text icon"></i>
       <span class="icon-label">Rapports</span>
     </li>
+
     <!-- gestion access -->
-    <li *ngIf="isOpen " (mouseenter)="hover=true" (mouseleave)="hover=false" [ngClass]="{'hover': hover}"  [routerLink]="'/GestionAccess/'+websiteId">
+    <li *ngIf="isOpen" (mouseenter)="hover=true" (mouseleave)="hover=false" [ngClass]="{'hover': hover}" [routerLink]="'/GestionAccess/'+websiteId">
       <i class="fa fa-users icon"></i> Gestion Access
     </li>
-    <li *ngIf="!isOpen "[routerLink]="'/GestionAccess/'+websiteId">
+    <li *ngIf="!isOpen" [routerLink]="'/GestionAccess/'+websiteId">
       <i class="fa fa-users icon"></i>
       <span class="icon-label">Access</span>
     </li>
 
+    <!-- Google Form link -->
+    <li *ngIf="isOpen" (mouseenter)="hover=true" (mouseleave)="hover=false" [ngClass]="{'hover': hover}">
+      <a routerLink="/redirect-to-google-form">
+        <i class="fa fa-google icon"></i> Google Form
+      </a>
+    </li>
+    <li *ngIf="!isOpen">
+      <a routerLink="/redirect-to-google-form">
+        <i class="fa fa-google icon"></i>
+        <span class="icon-label">Google Form</span>
+      </a>
+    </li>
   </ul>
 </div>

@@ -29,6 +29,10 @@ urlpatterns = [
     path('GestionBI/', include('GestionBI.urls')),
     path('GestionAuth/', include('GestionAuth.urls')),
     path('graph/', include('graph.urls')),
+    path('generator/', include('generator.urls')),
+    path('insights/', include('insights.urls')),
+    path('', include('index.urls')),
+    path('social/', include('social_django.urls', namespace='social')),
 
   
 ]

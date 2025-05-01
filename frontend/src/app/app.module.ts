@@ -92,7 +92,8 @@ import { MatOptionModule } from '@angular/material/core';  // Ajoutez cette lign
 import { SegmentsFilterComponent } from './GestionBI/graphs/data-analysis/filter/segments-filter/segments-filter.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';  // Ajoutez cette ligne
 import { MatChipsModule } from '@angular/material/chips';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CodeGeneratorService } from './codegenerator.service';
+import { RedirectComponent } from './redirect/redirect.component';
 @NgModule({
   declarations: [
     SegmentsFilterComponent,
@@ -154,6 +155,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ButtonConfigComponent,
     SidebarSettingsComponent,
     DataBDComponent,
+    RedirectComponent,
 
 
 
@@ -161,6 +163,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
   ],
   imports: [
+    RouterModule,
     MatDatepickerModule,
     MatNativeDateModule,
     CommonModule,
@@ -193,7 +196,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     CommonModule,
     GraphsModule
   ],
-  providers: [SidebarService],
+  providers: [SidebarService ,CodeGeneratorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

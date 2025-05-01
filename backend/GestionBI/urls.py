@@ -11,7 +11,6 @@ from .views import SidebarViewSet, SidebarItemViewSet,get_sidebar_items,create_g
 from .views import SelectedSegmentListCreateView, SelectedSegmentDeleteView
 from .views import update_selected_segment
 
-
 router = DefaultRouter()
 router.register(r'sidebars', SidebarViewSet)
 router.register(r'sidebar-items', SidebarItemViewSet)
@@ -73,7 +72,6 @@ path('responsible_realisation/<int:id>/', views.get_responsible_realisation_by_i
     path('sidebar-items/<int:sidebar_item_id>/', get_sidebar_items, name='get_sidebar_items'),
 path('graphs/item/<int:sidebar_item_id>/', views.get_graphs_by_item, name='get_graphs_by_item'),
     path('create_graph_with_item/', create_graph_with_item, name='create_graph_with_item'),
-
 
 ]
 

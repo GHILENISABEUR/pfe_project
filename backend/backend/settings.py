@@ -51,8 +51,10 @@ INSTALLED_APPS = [
     'GestionBI.apps.GestionbiConfig',
     'GestionAuth.apps.GestionauthConfig',
     'rest_framework.authtoken',
-    'graph'
-
+    'graph',
+    'generator',
+    'insights',
+    'index',
    
 ]
 
@@ -88,17 +90,15 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = 'backend.wsgi.application'
-
-
+AUTH_USER_MODEL = 'accounts.User'  # ou 'index.User', mais PAS les deux !
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db',
+        'NAME': 'boombbam_db',
         'USER':'saber',
         'HOST': '127.0.0.1',
         'PASSWORD':'0000',
@@ -166,12 +166,25 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 AUTH_USER_MODEL = 'Accounts.User'
 
+import socket
+
+#s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+#s.connect(("8.8.8.8", 80))
+
+#ALLOWED_HOSTS = [os.getsockname()[0], '127.0.0.1', 'localhost']
+#s.close()
+    
 APPEND_SLASH = True
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-)
+  'django.contrib.auth.backends.ModelBackend',
+   'allauth.account.auth_backends.AuthenticationBackend',
+   'social_core.backends.google.GoogleOAuth2',
+   'django.contrib.auth.backends.ModelBackend',
+   'allauth.account.auth_backends.AuthenticationBackend',
+   # …other backends…
+ )
+
 
 SITE_ID = 1
 

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gemini Code Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+        }
+        textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        pre {
+            background-color: #282c34;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: Consolas, monospace;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .output-section {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gemini Code Generator</h1>
+        <form method="post">
+            {% csrf_token %}
+            <label for="description">Description:</label>
+            <textarea name="description" id="description" rows="4" placeholder="Describe the function you want...">{{ description }}</textarea>
+
+            <label for="language">Language:</label>
+            <select name="language" id="language">
+                <option value="python" {% if language == "python" %}selected{% endif %}>Python</option>
+                <option value="javascript" {% if language == "javascript" %}selected{% endif %}>JavaScript</option>
+                <option value="java" {% if language == "java" %}selected{% endif %}>Java</option>
+                <option value="c++" {% if language == "c++" %}selected{% endif %}>C++</option>
+            </select>
+
+            <button type="submit">Generate Code</button>
+        </form>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        {% if code %}
+            <div class="output-section">
+                <h3>Generated Code:</h3>
+                <pre>{{ code }}</pre>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -26,13 +26,16 @@ import { ChangePasswordComponent } from './GestionAuth/change-password/change-pa
 
 import { SidebarComponent } from './GestionUI/component/sidebar/sidebar.component';
 import { NavbarHorizontalComponent } from './navbar-horizontal/navbar-horizontal.component';
+import { RedirectComponent } from './redirect/redirect.component';
 
 
 
 const routes: Routes = [
   { path: '', component: S6o7HomeComponent },
   { path: 'login', component: S6o8o2LoginComponent },
-
+  { path: 'redirect-to-django', component: RedirectComponent },
+  {path: 'redirect-to-chart', component: RedirectComponent},
+  {path: 'redirect-to-google-form', component: RedirectComponent},
   { path: 'register', component: S6o8o1RegisterComponent },
   { path: 'user-g-adress',component:UserGAdressComponent },
   { path: 'forgot-pwd', component: VerificationCodeComponent },
